@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BudProcess — автоматизація документів для будівництва</title>
+<meta name="description" content="BudProcess: автоматизована підготовка КП, звітів з аналізу цін та договорів для будівельних компаній. AI-powered document automation for construction.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF6;
+    --grid:rgba(22,35,46,.055);
+    --ink:#16232E;
+    --muted:#5E6B76;
+    --mark:#F2B705;
+    --line:#16232E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:24px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  }
+  .sheet{
+    position:relative;
+    width:min(880px,100%);
+    border:1.5px solid var(--line);
+    outline:1px solid var(--line);
+    outline-offset:5px;
+    background:var(--paper);
+    padding:56px 56px 0;
+    animation:appear .5s ease-out both;
+  }
+  @keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion: reduce){.sheet{animation:none}}
+
+  .doc-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:44px;
+  }
+  .brand{
+    font-family:"IBM Plex Sans",sans-serif;
+    font-weight:700;
+    font-size:20px;
+    letter-spacing:.01em;
+    color:var(--ink);
+    text-transform:none;
+  }
+  .brand .p{color:var(--muted);font-weight:600}
+
+  h1{
+    font-size:clamp(26px,4.6vw,40px);
+    line-height:1.15;
+    font-weight:700;
+    max-width:18ch;
+    margin-bottom:18px;
+  }
+  .hl{
+    background:linear-gradient(transparent 62%, var(--mark) 62%, var(--mark) 94%, transparent 94%);
+  }
+  .lead{
+    font-size:17px;
+    line-height:1.6;
+    color:var(--muted);
+    max-width:52ch;
+    margin-bottom:36px;
+  }
+
+  .services{
+    list-style:none;
+    display:grid;
+    gap:10px;
+    margin-bottom:40px;
+    font-size:15.5px;
+  }
+  .services li{
+    display:flex;
+    gap:12px;
+    align-items:baseline;
+  }
+  .services .tick{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px;
+    color:var(--ink);
+    border:1px solid var(--ink);
+    padding:1px 6px;
+    white-space:nowrap;
+  }
+
+  .contact{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px 28px;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:14px;
+    margin-bottom:48px;
+  }
+  .contact a{
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1.5px solid var(--mark);
+    padding-bottom:1px;
+  }
+  .contact a:hover{background:var(--mark)}
+  .contact a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .contact .msgr{color:var(--muted)}
+
+  .titleblock{
+    margin:0 -56px;
+    border-top:1.5px solid var(--line);
+    display:grid;
+    grid-template-columns:1fr 1fr 1.4fr;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+  }
+  .cell{
+    padding:10px 14px 12px;
+    border-right:1px solid var(--line);
+  }
+  .cell:last-child{border-right:none}
+  .cell b{
+    display:block;
+    font-weight:500;
+    text-transform:uppercase;
+    color:var(--muted);
+    font-size:9.5px;
+    margin-bottom:3px;
+  }
+  .status-dot{
+    display:inline-block;
+    width:8px;height:8px;
+    background:var(--mark);
+    margin-right:6px;
+  }
+  .en{
+    font-size:13px;
+    color:var(--muted);
+    font-family:"IBM Plex Sans",sans-serif;
+    letter-spacing:0;
+  }
+
+  @media(max-width:640px){
+    .sheet{padding:32px 24px 0}
+    .titleblock{margin:0 -24px;grid-template-columns:1fr}
+    .cell{border-right:none;border-bottom:1px solid var(--line)}
+    .cell:last-child{border-bottom:none}
+    .doc-head{flex-direction:column;gap:6px;margin-bottom:32px}
+  }
+</style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="doc-head">
+      <span class="brand">Bud<span class="p">Process</span></span>
+      <span>Документація для будівництва</span>
+    </header>
+
+    <h1>Аналіз цін та комерційні пропозиції <span class="hl">для будівництва</span></h1>
+
+    <p class="lead">Надсилаєте кошторис — отримуєте готовий комплект цінової документації.
+    Швидко. Грамотно. Готово до експертизи.</p>
+
+    <ul class="services">
+      <li><span class="tick">01</span> Складання комерційних пропозицій на будівельні матеріали</li>
+      <li><span class="tick">02</span> Звіт з аналізу цін для ЄДЕССБ та експертизи</li>
+      <li><span class="tick">03</span> Оформлення згідно з чинною Настановою з визначення вартості будівництва</li>
+      <li><span class="tick">04</span> Документи перевіряє інженер-будівельник: 10+ років у галузі, досвід головного інженера будівельної компанії, сертифікований кошторисник</li>
+    </ul>
+
+    <div class="contact">
+      <a href="tel:+380663914479">+380 66 391 44 79</a>
+      <span class="msgr">Телефон · Viber · WhatsApp · Telegram</span>
+    </div>
+
+    <footer class="titleblock">
+      <div class="cell">
+        <b>Проєкт</b>
+        BudProcess · budprocess.com
+      </div>
+      <div class="cell">
+        <b>Статус</b>
+        <span class="status-dot"></span>Сайт у розробці · Працюємо по всій Україні
+      </div>
+      <div class="cell">
+        <b>EN</b>
+        <span class="en">AI-powered document automation for construction. Full site coming soon.</span>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
