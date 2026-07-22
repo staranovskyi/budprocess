@@ -3,210 +3,304 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BudProcess — автоматизація документів для будівництва</title>
-<meta name="description" content="BudProcess: автоматизована підготовка КП, звітів з аналізу цін та договорів для будівельних компаній. AI-powered document automation for construction.">
+<title>BudProcess — аналіз цін та комерційні пропозиції для будівництва</title>
+<meta name="description" content="Звіт з аналізу цін для ЄДЕССБ та експертизи, комерційні пропозиції на будівельні матеріали. Оформлення за Настановою з визначення вартості будівництва. Від 15 000 грн за комплект. Вся Україна, дистанційно.">
+<meta name="keywords" content="аналіз цін, звіт з аналізу цін, комерційна пропозиція будівництво, КП на матеріали, ЄДЕССБ, e-construction, експертиза кошторису, обґрунтування вартості ресурсів, Настанова з визначення вартості будівництва, аналіз цін під ключ">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="%2316232E"/><path d="M46 0h18v18z" fill="%23F2B705"/><text x="30" y="46" font-family="Arial,sans-serif" font-size="40" font-weight="bold" fill="white" text-anchor="middle">B</text></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#FBFAF6;
-    --grid:rgba(22,35,46,.055);
-    --ink:#16232E;
-    --muted:#5E6B76;
-    --mark:#F2B705;
-    --line:#16232E;
+    --paper:#FBFAF6; --ink:#16232E; --amber:#F2B705; --amber-dark:#D09B00;
+    --amber-soft:#FFF3D0; --muted:#5E6B76; --line:#E8EAE5; --card:#FFFFFF;
+    --r:18px; --shadow:0 10px 30px rgba(22,35,46,.07);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
   body{
-    font-family:"IBM Plex Sans",system-ui,sans-serif;
-    color:var(--ink);
-    background:var(--paper);
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size:24px 24px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
+    font-family:"IBM Plex Sans",system-ui,sans-serif;background:var(--paper);color:var(--ink);
+    font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
   }
-  .sheet{
-    position:relative;
-    width:min(880px,100%);
-    border:1.5px solid var(--line);
-    outline:1px solid var(--line);
-    outline-offset:5px;
-    background:var(--paper);
-    padding:56px 56px 0;
-    animation:appear .5s ease-out both;
-  }
-  @keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  @media (prefers-reduced-motion: reduce){.sheet{animation:none}}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:6px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+  @media(max-width:560px){.wrap{padding:0 20px}}
 
-  .doc-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    gap:16px;
-    font-family:"IBM Plex Mono",monospace;
-    font-size:12px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin-bottom:44px;
-  }
-  .brand{
-    font-family:"IBM Plex Sans",sans-serif;
-    font-weight:700;
-    font-size:20px;
-    letter-spacing:.01em;
-    color:var(--ink);
-    text-transform:none;
-  }
-  .brand .p{color:var(--muted);font-weight:600}
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .head-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+  .logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+  .logo-tile{width:38px;height:38px;background:var(--ink);border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;font-weight:700;font-size:21px;position:relative;overflow:hidden}
+  .logo-tile::after{content:"";position:absolute;top:0;right:0;width:12px;height:12px;background:linear-gradient(225deg,transparent 0 50%,var(--amber) 50% 100%)}
+  .logo-name{font-weight:700;font-size:19px}
+  .logo-name span{color:var(--amber-dark)}
+  .head-phone{text-align:right;line-height:1.2}
+  .hp-num{text-decoration:none;display:inline-block}
+  .hp-num b{font-size:16px;white-space:nowrap}
+  .head-msgr{display:flex;gap:10px;align-items:center;justify-content:flex-end;margin-top:6px}
+  .head-msgr a{color:var(--muted);width:26px;height:26px;display:grid;place-items:center;transition:color .13s ease}
+  .head-msgr svg{display:block}
+  .head-msgr a:hover{color:var(--ink)}
+  @media(max-width:560px){.hp-num b{font-size:14.5px}.head-msgr{gap:13px}.head-msgr svg{width:20px;height:20px}}
 
-  h1{
-    font-size:clamp(26px,4.6vw,40px);
-    line-height:1.15;
-    font-weight:700;
-    max-width:18ch;
-    margin-bottom:18px;
-  }
-  .hl{
-    background:linear-gradient(transparent 62%, var(--mark) 62%, var(--mark) 94%, transparent 94%);
-  }
-  .lead{
-    font-size:17px;
-    line-height:1.6;
-    color:var(--muted);
-    max-width:52ch;
-    margin-bottom:36px;
-  }
+  /* hero */
+  .hero{position:relative;text-align:center;padding:76px 32px 64px;overflow:hidden}
+  @media(max-width:720px){.hero{padding:44px 20px 44px;text-align:left}}
+  .hero::before{content:"";position:absolute;top:0;right:0;width:72px;height:72px;background:linear-gradient(225deg,transparent 0 50%,var(--amber) 50% 100%)}
+  .kicker{display:inline-flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:4px 9px;background:var(--amber-soft);color:#8a6400;border-radius:999px;padding:7px 18px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;letter-spacing:.04em;margin-bottom:26px}
+  .kicker svg{display:block;flex:none;color:var(--amber-dark)}
+  h1{font-size:clamp(32px,5.4vw,56px);line-height:1.1;font-weight:700;letter-spacing:-.015em;max-width:840px;margin:0 auto 20px}
+  @media(max-width:720px){h1{margin:0 0 16px}}
+  .pitch{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:620px;margin:0 auto 34px}
+  @media(max-width:720px){.pitch{margin:0 0 28px}}
+  .pitch b{color:var(--ink);font-weight:600}
+  .cta-row{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+  @media(max-width:720px){.cta-row{justify-content:flex-start}}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:600;font-size:16.5px;padding:15px 30px;border-radius:14px;transition:transform .13s ease,box-shadow .13s ease}
+  .btn-amber{background:var(--amber);color:var(--ink);box-shadow:0 8px 22px rgba(242,183,5,.38)}
+  .btn-amber:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(242,183,5,.5)}
+  .btn-line{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
+  .btn-line:hover{transform:translateY(-2px);border-color:var(--ink)}
+  .hero-note{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted);margin-top:24px}
 
-  .services{
-    list-style:none;
-    display:grid;
-    gap:10px;
-    margin-bottom:40px;
-    font-size:15.5px;
-  }
-  .services li{
-    display:flex;
-    gap:12px;
-    align-items:baseline;
-  }
-  .services .tick{
-    font-family:"IBM Plex Mono",monospace;
-    font-size:12px;
-    color:var(--ink);
-    border:1px solid var(--ink);
-    padding:1px 6px;
-    white-space:nowrap;
+  /* стрічка фактів */
+
+  /* sections */
+  section{padding:64px 0}
+  @media(max-width:720px){section{padding:44px 0}}
+  .sec-label{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-dark);font-weight:600;margin-bottom:10px}
+  h2{font-size:clamp(24px,3.4vw,34px);font-weight:700;letter-spacing:-.01em;margin-bottom:30px;max-width:700px}
+
+  /* кроки — конвеєр з 5 етапів */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;position:relative}
+  .steps::before{content:"";position:absolute;top:22px;left:6%;right:6%;border-top:2px dashed var(--amber);opacity:.45}
+  .step{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--amber);border-radius:var(--r);padding:24px 20px;box-shadow:var(--shadow);position:relative}
+  .step-num{display:inline-grid;place-items:center;width:44px;height:44px;background:var(--amber-soft);color:#B8890B;border-radius:12px;font-weight:700;font-size:18px;margin-bottom:14px;font-family:"IBM Plex Mono",monospace}
+  .step h3{font-size:16.5px;font-weight:600;margin-bottom:6px}
+  .step p{font-size:14px;color:var(--muted);line-height:1.55}
+  @media(max-width:920px){
+    .steps{grid-template-columns:1fr;gap:12px}
+    .steps::before{display:none}
+    .step{display:grid;grid-template-columns:44px 1fr;gap:4px 18px;align-items:center;border-top:1px solid var(--line);border-left:3px solid var(--amber);padding:18px 20px}
+    .step-num{background:var(--amber);color:var(--ink);margin-bottom:0}
+    .step h3{margin-bottom:0}
+    .step p{grid-column:2}
   }
 
-  .contact{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px 28px;
-    font-family:"IBM Plex Mono",monospace;
-    font-size:14px;
-    margin-bottom:48px;
-  }
-  .contact a{
-    color:var(--ink);
-    text-decoration:none;
-    border-bottom:1.5px solid var(--mark);
-    padding-bottom:1px;
-  }
-  .contact a:hover{background:var(--mark)}
-  .contact a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
-  .contact .msgr{color:var(--muted)}
+  /* картка валідатора */
+  .b-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:30px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .b-card h3{font-size:19px;font-weight:600;margin-bottom:16px}
+  .eng{background:var(--ink);color:#fff}
+  .eng::after{content:"";position:absolute;top:0;right:0;width:44px;height:44px;background:linear-gradient(225deg,transparent 0 50%,var(--amber) 50% 100%)}
+  .eng .tag{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;color:var(--amber);text-transform:uppercase;margin-bottom:14px}
+  .eng h3{color:#fff}
+  .eng p{font-size:15px;opacity:.85;line-height:1.6}
+  .eng .years{font-family:"IBM Plex Mono",monospace;font-size:38px;font-weight:600;color:var(--amber);margin:18px 0 4px}
+  .eng .cap{font-size:13px;opacity:.65}
+  .cred{list-style:none;margin-top:4px}
+  .cred li{display:flex;gap:12px;align-items:flex-start;padding:9px 0;font-size:15px;line-height:1.5;border-bottom:1px dashed rgba(255,255,255,.14)}
+  .cred li:last-child{border-bottom:none}
+  .cred li::before{content:"";flex:none;width:8px;height:8px;background:var(--amber);border-radius:2px;margin-top:8px}
+  .eng-wide{margin-top:26px;display:grid;grid-template-columns:1fr auto;gap:16px 48px;align-items:center}
+  .eng-wide .eng-side{text-align:right;padding-right:36px}
+  @media(max-width:720px){.eng-wide{grid-template-columns:1fr}.eng-wide .eng-side{text-align:left;padding-right:0}}
 
-  .titleblock{
-    margin:0 -56px;
-    border-top:1.5px solid var(--line);
-    display:grid;
-    grid-template-columns:1fr 1fr 1.4fr;
-    font-family:"IBM Plex Mono",monospace;
-    font-size:11px;
-    letter-spacing:.06em;
-  }
-  .cell{
-    padding:10px 14px 12px;
-    border-right:1px solid var(--line);
-  }
-  .cell:last-child{border-right:none}
-  .cell b{
-    display:block;
-    font-weight:500;
-    text-transform:uppercase;
-    color:var(--muted);
-    font-size:9.5px;
-    margin-bottom:3px;
-  }
-  .status-dot{
-    display:inline-block;
-    width:8px;height:8px;
-    background:var(--mark);
-    margin-right:6px;
-  }
-  .en{
-    font-size:13px;
-    color:var(--muted);
-    font-family:"IBM Plex Sans",sans-serif;
-    letter-spacing:0;
-  }
+  /* чому ми */
+  .why{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:820px){.why{grid-template-columns:1fr}}
+  .why-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px;box-shadow:var(--shadow)}
+  .why-card h3{font-size:17px;font-weight:600;margin-bottom:8px}
+  .why-card p{font-size:15px;color:var(--muted)}
 
-  @media(max-width:720px){
-    body{align-items:flex-start;padding:16px 12px 32px}
-    .sheet{padding:32px 24px 0}
-    .titleblock{margin:0 -24px;grid-template-columns:1fr}
-    .cell{border-right:none;border-bottom:1px solid var(--line)}
-    .cell:last-child{border-bottom:none}
-    .doc-head{flex-direction:column;gap:6px;margin-bottom:32px}
-  }
+  /* ціна */
+  .price-card{background:var(--ink);color:#fff;border-radius:24px;padding:44px;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;position:relative;overflow:hidden}
+  .price-card::after{content:"";position:absolute;top:0;right:0;width:54px;height:54px;background:linear-gradient(225deg,transparent 0 50%,var(--amber) 50% 100%)}
+  @media(max-width:820px){.price-card{grid-template-columns:1fr;padding:32px;gap:24px}}
+  .price-val{font-family:"IBM Plex Mono",monospace;font-size:clamp(36px,5vw,48px);font-weight:600;line-height:1.1;padding-right:56px}
+  .price-list{padding-right:20px}
+  .price-val span{color:var(--amber)}
+  .price-cap{font-size:14.5px;opacity:.75;margin-top:8px;max-width:300px}
+  .price-list{list-style:none;display:flex;flex-direction:column;gap:11px;font-size:15.5px}
+  .price-list li{display:flex;gap:12px;align-items:flex-start;opacity:.9}
+  .price-list li::before{content:"—";color:var(--amber);flex:none}
+  .price-free{margin-top:16px;font-weight:600}
+  .price-free a{color:var(--amber);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+
+  /* FAQ */
+
+  /* контакти */
+  .contact-box{display:flex;flex-wrap:wrap;align-items:stretch;gap:14px}
+  .c-call{flex:1 1 300px;text-decoration:none;background:var(--ink);color:#fff;border-radius:16px;padding:22px 26px;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow);transition:transform .13s ease}
+  .c-call:hover{transform:translateY(-3px)}
+  .c-call .c-ic{width:46px;height:46px;flex:none;background:var(--amber);color:var(--ink);border-radius:12px;display:grid;place-items:center}
+  .c-call b{font-family:"IBM Plex Mono",monospace;font-size:20px;font-weight:600;letter-spacing:-.01em;display:block}
+  .c-call small{font-size:13px;opacity:.7}
+  .c-msgrs{flex:1 1 300px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .c-msgr{text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:16px 8px;font-weight:600;font-size:14.5px;color:var(--ink);box-shadow:var(--shadow);transition:transform .13s ease,border-color .13s ease}
+  .c-msgr:hover{transform:translateY(-3px);border-color:var(--amber)}
+  .c-msgr svg{color:var(--muted)}
+  .c-email{display:inline-flex;align-items:center;gap:10px;margin-top:16px;text-decoration:none;color:var(--ink);font-weight:600;font-size:16px;transition:color .13s ease}
+  .c-email svg{color:var(--muted)}
+  .c-email:hover{color:var(--amber-dark)}
+  .contact-note{margin-top:14px;font-size:15px;color:var(--muted);max-width:640px}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 36px}
+  .foot-in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;font-size:13.5px;color:var(--muted)}
+  .foot-in .mono{font-size:12.5px}
 </style>
 </head>
 <body>
-  <main class="sheet">
-    <header class="doc-head">
-      <span class="brand">Bud<span class="p">Process</span></span>
-      <span>Документація для будівництва</span>
-    </header>
 
-    <h1>Аналіз цін та комерційні пропозиції <span class="hl">для будівництва</span></h1>
-
-    <p class="lead">Надсилаєте кошторис — отримуєте готовий комплект цінової документації.
-    Швидко. Грамотно. Готово до експертизи.</p>
-
-    <ul class="services">
-      <li><span class="tick">01</span> Складання комерційних пропозицій на будівельні матеріали</li>
-      <li><span class="tick">02</span> Звіт з аналізу цін для ЄДЕССБ та експертизи</li>
-      <li><span class="tick">03</span> Оформлення згідно з чинною Настановою з визначення вартості будівництва</li>
-      <li><span class="tick">04</span> Документи перевіряє інженер-будівельник: 10+ років у галузі, досвід головного інженера будівельної компанії, сертифікований кошторисник</li>
-    </ul>
-
-    <div class="contact">
-      <a href="tel:+380663914479">+380 66 391 44 79</a>
-      <span class="msgr">Телефон · Viber · WhatsApp · Telegram</span>
+<header>
+  <div class="wrap head-in">
+    <a class="logo" href="#">
+      <span class="logo-tile">B</span>
+      <span class="logo-name">Bud<span>Process</span></span>
+    </a>
+    <div class="head-phone">
+      <a class="hp-num" href="tel:+380663914479"><b>+380 66 391 44 79</b></a>
+      <div class="head-msgr">
+        <a href="viber://chat?number=%2B380663914479" aria-label="Viber"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2C7.2 2 3 5.4 3 9.9c0 2.2 1 4.2 2.8 5.6v3.6l3.3-1.9c.9.2 1.9.4 2.9.4 4.8 0 9-3.4 9-7.9S16.8 2 12 2zm4.9 11.2c-.2.5-.9 1-1.4 1.1-.4.1-.8.1-3-.9-2.4-1.1-3.9-3.6-4-3.7-.1-.2-.9-1.3-.9-2.4 0-1.1.6-1.7.8-1.9.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.2 0 .4-.1.5l-.3.4c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.5-.1l.7-.9c.1-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.2.1.7-.1 1.2z"/></svg></a>
+        <a href="https://wa.me/380663914479" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.4c.1.2 1.7 2.6 4.1 3.6.6.3 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1z"/></svg></a>
+        <a href="https://t.me/+380663914479" aria-label="Telegram"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.8 19c-.2 1-.8 1.2-1.6.8l-4.5-3.3-2.2 2.1c-.2.2-.5.4-.9.4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-1 .2-1.4L20.6 3c.8-.3 1.5.2 1.3 1.3z"/></svg></a>
+      </div>
     </div>
+  </div>
+</header>
 
-    <footer class="titleblock">
-      <div class="cell">
-        <b>Проєкт</b>
-        BudProcess · budprocess.com
+<main>
+
+<div class="hero">
+  <span class="kicker">Кошторис<svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 6h9M7.2 2.8 10.5 6l-3.3 3.2"/></svg>Оцінка<svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 6h9M7.2 2.8 10.5 6l-3.3 3.2"/></svg>КП<svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 6h9M7.2 2.8 10.5 6l-3.3 3.2"/></svg>Аналіз цін<svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 6h9M7.2 2.8 10.5 6l-3.3 3.2"/></svg>E-construction</span>
+  <h1>Аналіз цін та комерційні пропозиції для будівництва</h1>
+  <p class="pitch">Надсилаєте кошторис — отримуєте готовий комплект цінової документації під ключ. <b>Швидко. Перевірено. Готово до експертизи.</b></p>
+  <div class="cta-row">
+    <a class="btn btn-amber" href="#contact">Надіслати кошторис</a>
+    <a class="btn btn-line" href="tel:+380663914479">Подзвонити</a>
+  </div>
+  <p class="hero-note">Працюємо по всій Україні, дистанційно</p>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-label">Як це працює</div>
+    <h2>Від кошторису до ЄДЕССБ — один процес</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <h3>Отримуємо кошторис</h3>
+        <p>Надсилаєте файл у будь-якому форматі — ІМ, Excel, PDF.</p>
       </div>
-      <div class="cell">
-        <b>Статус</b>
-        <span class="status-dot"></span>Сайт у розробці · Працюємо по всій Україні
+      <div class="step">
+        <span class="step-num">2</span>
+        <h3>Оцінюємо обсяг</h3>
+        <p>Безкоштовно. Фіксуємо вартість і строк у договорі до початку роботи.</p>
       </div>
-      <div class="cell">
-        <b>EN</b>
-        <span class="en">AI-powered document automation for construction. Full site coming soon.</span>
+      <div class="step">
+        <span class="step-num">3</span>
+        <h3>Робота з комерційними пропозиціями</h3>
+        <p>На матеріальні ресурси, згруповані за постачальниками.</p>
       </div>
-    </footer>
-  </main>
+      <div class="step">
+        <span class="step-num">4</span>
+        <h3>Створюємо аналіз цін</h3>
+        <p>Звіт для ЄДЕССБ та експертизи — на основі даних постачальників або відкритих джерел. Оформлення за чинною Настановою, включно зі змінами 2026 року.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <h3>Завантажуємо в e-construction</h3>
+        <p>За потреби публікуємо звіт безпосередньо в ЄДЕССБ. Ви отримуєте повний комплект — до підписання й подання на експертизу.</p>
+      </div>
+    </div>
+    <div class="b-card eng eng-wide">
+      <div>
+        <div class="tag">Хто відповідає за якість</div>
+        <h3>Кожен комплект перевіряє інженер-будівельник</h3>
+        <ul class="cred">
+          <li>Досвід роботи головним інженером будівельної компанії</li>
+          <li>Сертифікований інженер-кошторисник</li>
+          <li>Практичний досвід в аналізі цін і супроводі експертизи</li>
+        </ul>
+      </div>
+      <div class="eng-side">
+        <div class="years">15+</div>
+        <div class="cap">років у будівельній галузі</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-label">Чому ми</div>
+    <h2>Швидкість без втрати якості</h2>
+    <div class="why">
+      <div class="why-card">
+        <h3>Автоматизований процес</h3>
+        <p>Обробка кошторису та формування документів максимально автоматизовані. Менше ручної роботи — менше помилок і швидший результат.</p>
+      </div>
+      <div class="why-card">
+        <h3>Прозорі умови</h3>
+        <p>Вартість і строки фіксуємо в договорі до початку роботи — без сюрпризів у процесі.</p>
+      </div>
+      <div class="why-card">
+        <h3>Дистанційно, по всій Україні</h3>
+        <p>Обмін документами онлайн: пошта, месенджери, електронний підпис. Місто не має значення.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap">
+    <div class="sec-label">Вартість</div>
+    <h2>Прозора ціна до початку роботи</h2>
+    <div class="price-card">
+      <div>
+        <div class="price-val">від 15 000 <span>грн</span></div>
+      </div>
+      <div>
+        <ul class="price-list">
+          <li>Точна вартість визначається кількістю позицій у кошторисі, ступенем нашої залученості до роботи з комерційними пропозиціями, а також необхідністю завантаження звіту на e-construction.gov.ua</li>
+          <li>Фіксуємо вартість у договорі до початку роботи</li>
+        </ul>
+        <p class="price-free">Точну цифру для вашого проєкту назвемо після <a href="#contact">безкоштовної оцінки</a> обсягу.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-label">Контакти</div>
+    <h2>Надішліть кошторис — повернемось з оцінкою</h2>
+    <div class="contact-box">
+      <a class="c-call" href="tel:+380663914479">
+        <span class="c-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.3 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C11.6 21 3 12.4 3 1.9c0-.5.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.3z"/></svg></span>
+        <span><b>+380 66 391 44 79</b><small>Натисніть, щоб зателефонувати</small></span>
+      </a>
+      <div class="c-msgrs">
+        <a class="c-msgr" href="viber://chat?number=%2B380663914479"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 2C7.2 2 3 5.4 3 9.9c0 2.2 1 4.2 2.8 5.6v3.6l3.3-1.9c.9.2 1.9.4 2.9.4 4.8 0 9-3.4 9-7.9S16.8 2 12 2zm4.9 11.2c-.2.5-.9 1-1.4 1.1-.4.1-.8.1-3-.9-2.4-1.1-3.9-3.6-4-3.7-.1-.2-.9-1.3-.9-2.4 0-1.1.6-1.7.8-1.9.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.2 0 .4-.1.5l-.3.4c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.5-.1l.7-.9c.1-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.2.1.7-.1 1.2z"/></svg>Viber</a>
+        <a class="c-msgr" href="https://wa.me/380663914479"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.4c.1.2 1.7 2.6 4.1 3.6.6.3 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1z"/></svg>WhatsApp</a>
+        <a class="c-msgr" href="https://t.me/+380663914479"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.8 19c-.2 1-.8 1.2-1.6.8l-4.5-3.3-2.2 2.1c-.2.2-.5.4-.9.4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-1 .2-1.4L20.6 3c.8-.3 1.5.2 1.3 1.3z"/></svg>Telegram</a>
+      </div>
+    </div>
+    <a class="c-email" href="mailto:budprocess@gmail.com"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm8.99 6.4L20 6.5H4l7.99 4.9zM4 8.3V17h16V8.3l-8 4.9-8-4.9z"/></svg>budprocess@gmail.com</a>
+    <p class="contact-note">Кошторис можна надіслати одразу в месенджер або на пошту файлом. Оцінка обсягу безкоштовна і ні до чого не зобов'язує.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <div><b>BudProcess</b> · Цінова документація для будівництва · © 2026 · budprocess.com</div>
+    <div class="mono"><a href="mailto:budprocess@gmail.com">budprocess@gmail.com</a></div>
+  </div>
+</footer>
+
 </body>
 </html>
