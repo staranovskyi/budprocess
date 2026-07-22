@@ -125,7 +125,8 @@
   .price-card{background:var(--ink);color:#fff;border-radius:24px;padding:44px;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;position:relative;overflow:hidden}
   .price-card::after{content:"";position:absolute;top:0;right:0;width:54px;height:54px;background:linear-gradient(225deg,transparent 0 50%,var(--amber) 50% 100%)}
   @media(max-width:820px){.price-card{grid-template-columns:1fr;padding:32px;gap:24px}}
-  .price-val{font-family:"IBM Plex Mono",monospace;font-size:clamp(36px,5vw,48px);font-weight:600;line-height:1.1;padding-right:56px}
+  .price-val{font-family:"IBM Plex Mono",monospace;font-size:clamp(36px,5vw,48px);font-weight:600;line-height:1.1;padding-right:56px;white-space:nowrap}
+  @media(max-width:560px){.price-val{font-size:clamp(28px,8.5vw,36px);padding-right:0}}
   .price-list{padding-right:20px}
   .price-val span{color:var(--amber)}
   .price-cap{font-size:14.5px;opacity:.75;margin-top:8px;max-width:300px}
@@ -171,7 +172,7 @@
       <div class="head-msgr">
         <a href="viber://chat?number=%2B380663914479" aria-label="Viber"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2C7.2 2 3 5.4 3 9.9c0 2.2 1 4.2 2.8 5.6v3.6l3.3-1.9c.9.2 1.9.4 2.9.4 4.8 0 9-3.4 9-7.9S16.8 2 12 2zm4.9 11.2c-.2.5-.9 1-1.4 1.1-.4.1-.8.1-3-.9-2.4-1.1-3.9-3.6-4-3.7-.1-.2-.9-1.3-.9-2.4 0-1.1.6-1.7.8-1.9.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.2 0 .4-.1.5l-.3.4c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.5-.1l.7-.9c.1-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.2.1.7-.1 1.2z"/></svg></a>
         <a href="https://wa.me/380663914479" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.4c.1.2 1.7 2.6 4.1 3.6.6.3 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1z"/></svg></a>
-        <a href="https://t.me/+380663914479" aria-label="Telegram"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.8 19c-.2 1-.8 1.2-1.6.8l-4.5-3.3-2.2 2.1c-.2.2-.5.4-.9.4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-1 .2-1.4L20.6 3c.8-.3 1.5.2 1.3 1.3z"/></svg></a>
+        <a href="https://t.me/BudProcess" aria-label="Telegram"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.8 19c-.2 1-.8 1.2-1.6.8l-4.5-3.3-2.2 2.1c-.2.2-.5.4-.9.4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-1 .2-1.4L20.6 3c.8-.3 1.5.2 1.3 1.3z"/></svg></a>
       </div>
     </div>
   </div>
@@ -291,7 +292,7 @@
       <div class="c-msgrs">
         <a class="c-msgr" href="viber://chat?number=%2B380663914479"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 2C7.2 2 3 5.4 3 9.9c0 2.2 1 4.2 2.8 5.6v3.6l3.3-1.9c.9.2 1.9.4 2.9.4 4.8 0 9-3.4 9-7.9S16.8 2 12 2zm4.9 11.2c-.2.5-.9 1-1.4 1.1-.4.1-.8.1-3-.9-2.4-1.1-3.9-3.6-4-3.7-.1-.2-.9-1.3-.9-2.4 0-1.1.6-1.7.8-1.9.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.2 0 .4-.1.5l-.3.4c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.5-.1l.7-.9c.1-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.2.1.7-.1 1.2z"/></svg>Viber</a>
         <a class="c-msgr" href="https://wa.me/380663914479"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.4c.1.2 1.7 2.6 4.1 3.6.6.3 1 .4 1.4.5.6.2 1.1.2 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1z"/></svg>WhatsApp</a>
-        <a class="c-msgr" href="https://t.me/+380663914479"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.8 19c-.2 1-.8 1.2-1.6.8l-4.5-3.3-2.2 2.1c-.2.2-.5.4-.9.4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-1 .2-1.4L20.6 3c.8-.3 1.5.2 1.3 1.3z"/></svg>Telegram</a>
+        <a class="c-msgr" href="https://t.me/BudProcess"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.8 19c-.2 1-.8 1.2-1.6.8l-4.5-3.3-2.2 2.1c-.2.2-.5.4-.9.4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-1 .2-1.4L20.6 3c.8-.3 1.5.2 1.3 1.3z"/></svg>Telegram</a>
       </div>
     </div>
     <a class="c-email" href="mailto:budprocess@gmail.com"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm8.99 6.4L20 6.5H4l7.99 4.9zM4 8.3V17h16V8.3l-8 4.9-8-4.9z"/></svg>budprocess@gmail.com</a>
