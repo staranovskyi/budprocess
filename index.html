@@ -308,5 +308,24 @@
   </div>
 </footer>
 
+<script>
+// Smooth-scroll anchors without polluting the URL with #hash,
+// so a page reload never jumps back to the anchored section.
+document.querySelectorAll('a[href^="#"]').forEach(function(link){
+  link.addEventListener('click', function(e){
+    var href = link.getAttribute('href');
+    if(href === '#'){ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); return; }
+    var target = document.querySelector(href);
+    if(!target) return;
+    e.preventDefault();
+    target.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+// If a hash is already in the URL (old link, back/forward), drop it
+// so the next reload starts clean.
+if(location.hash){
+  history.replaceState(null, '', location.pathname + location.search);
+}
+</script>
 </body>
 </html>
