@@ -128,6 +128,8 @@
   .price-val{font-family:"IBM Plex Mono",monospace;font-size:clamp(36px,5vw,48px);font-weight:600;line-height:1.1;padding-right:56px;white-space:nowrap}
   @media(max-width:560px){.price-val{font-size:clamp(28px,8.5vw,36px);padding-right:0}}
   .price-list{padding-right:20px}
+  .price-val .ts{display:inline-block;width:.22em}
+  @media(max-width:560px){.price-val .ts{width:0}}
   .price-val span{color:var(--amber)}
   .price-cap{font-size:14.5px;opacity:.75;margin-top:8px;max-width:300px}
   .price-list{list-style:none;display:flex;flex-direction:column;gap:11px;font-size:15.5px}
@@ -267,7 +269,7 @@
     <h2>Прозора ціна до початку роботи</h2>
     <div class="price-card">
       <div>
-        <div class="price-val">від 15 000 <span>грн</span></div>
+        <div class="price-val">від 15<i class="ts"></i>000 <span>грн</span></div>
       </div>
       <div>
         <ul class="price-list">
