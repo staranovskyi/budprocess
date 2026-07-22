@@ -36,7 +36,7 @@
 
   /* header */
   header{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  .head-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+  .head-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
   .logo{display:flex;align-items:center;gap:11px;text-decoration:none}
   .logo-tile{width:38px;height:38px;background:var(--ink);border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;font-weight:700;font-size:21px;position:relative;overflow:hidden}
   .logo-tile::after{content:"";position:absolute;top:0;right:0;width:12px;height:12px;background:linear-gradient(225deg,transparent 0 50%,var(--amber) 50% 100%)}
@@ -52,8 +52,8 @@
   @media(max-width:560px){.hp-num b{font-size:14.5px}.head-msgr{gap:13px}.head-msgr svg{width:20px;height:20px}}
 
   /* hero */
-  .hero{position:relative;text-align:center;padding:76px 32px 64px;overflow:hidden}
-  @media(max-width:720px){.hero{padding:44px 20px 44px;text-align:left}}
+  .hero{position:relative;text-align:center;padding:52px 32px 40px;overflow:hidden}
+  @media(max-width:720px){.hero{padding:32px 20px 28px;text-align:left}}
   .hero::before{content:"";position:absolute;top:0;right:0;width:72px;height:72px;background:linear-gradient(225deg,transparent 0 50%,var(--amber) 50% 100%)}
   .kicker{display:inline-flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:4px 9px;background:var(--amber-soft);color:#8a6400;border-radius:999px;padding:7px 18px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;letter-spacing:.04em;margin-bottom:26px}
   .kicker svg{display:block;flex:none;color:var(--amber-dark)}
@@ -74,8 +74,8 @@
   /* стрічка фактів */
 
   /* sections */
-  section{padding:64px 0}
-  @media(max-width:720px){section{padding:44px 0}}
+  section{padding:32px 0}
+  @media(max-width:720px){section{padding:24px 0}}
   .sec-label{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-dark);font-weight:600;margin-bottom:10px}
   h2{font-size:clamp(24px,3.4vw,34px);font-weight:700;letter-spacing:-.01em;margin-bottom:30px;max-width:700px}
 
@@ -103,13 +103,14 @@
   .eng .tag{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;color:var(--amber);text-transform:uppercase;margin-bottom:14px}
   .eng h3{color:#fff}
   .eng p{font-size:15px;opacity:.85;line-height:1.6}
-  .eng .years{font-family:"IBM Plex Mono",monospace;font-size:38px;font-weight:600;color:var(--amber);margin:18px 0 4px}
+  .nb{white-space:nowrap}
+  .eng .years{font-family:"IBM Plex Mono",monospace;font-size:38px;font-weight:600;color:var(--amber);margin:6px 0 4px}
   .eng .cap{font-size:13px;opacity:.65}
   .cred{list-style:none;margin-top:4px}
   .cred li{display:flex;gap:12px;align-items:flex-start;padding:9px 0;font-size:15px;line-height:1.5;border-bottom:1px dashed rgba(255,255,255,.14)}
   .cred li:last-child{border-bottom:none}
   .cred li::before{content:"";flex:none;width:8px;height:8px;background:var(--amber);border-radius:2px;margin-top:8px}
-  .eng-wide{margin-top:26px;display:grid;grid-template-columns:1fr auto;gap:16px 48px;align-items:center}
+  .eng-wide{margin-top:26px;display:grid;grid-template-columns:1fr auto;gap:10px 48px;align-items:center}
   .eng-wide .eng-side{text-align:right;padding-right:36px}
   @media(max-width:720px){.eng-wide{grid-template-columns:1fr}.eng-wide .eng-side{text-align:left;padding-right:0}}
 
@@ -216,7 +217,7 @@
       </div>
       <div class="step">
         <span class="step-num">5</span>
-        <h3>Завантажуємо в e-construction</h3>
+        <h3>Завантажуємо в <span class="nb">E-construction</span></h3>
         <p>За потреби публікуємо звіт безпосередньо в ЄДЕССБ. Ви отримуєте повний комплект — до підписання й подання на експертизу.</p>
       </div>
     </div>
