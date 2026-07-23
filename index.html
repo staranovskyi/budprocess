@@ -11,7 +11,6 @@
 <meta name="theme-color" content="#1A2230">
 <meta name="description" content="Звіт з аналізу цін для ЄДЕССБ та експертизи, комерційні пропозиції на будівельні матеріали. Оформлення за Настановою з визначення вартості будівництва. Від 15 000 грн за комплект. Вся Україна, дистанційно.">
 <meta name="keywords" content="аналіз цін, звіт з аналізу цін, комерційна пропозиція будівництво, КП на матеріали, ЄДЕССБ, e-construction, експертиза кошторису, обґрунтування вартості ресурсів, Настанова з визначення вартості будівництва, аналіз цін під ключ">
-<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="%2316232E"/><path d="M46 0h18v18z" fill="%23F2B705"/><text x="30" y="46" font-family="Arial,sans-serif" font-size="40" font-weight="bold" fill="white" text-anchor="middle">B</text></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -51,7 +50,7 @@
   .head-msgr a:hover{color:var(--ink)}
   @media(max-width:560px){.hp-num b{font-size:14.5px}.head-msgr{gap:13px}.head-msgr svg{width:20px;height:20px}}
 
-  /* hero  */
+  /* hero */
   .hero{position:relative;text-align:center;padding:52px 32px 40px;overflow:hidden}
   @media(max-width:720px){.hero{padding:32px 20px 28px;text-align:left}}
   .hero::before{content:"";position:absolute;top:0;right:0;width:72px;height:72px;background:linear-gradient(225deg,transparent 0 50%,var(--amber) 50% 100%)}
@@ -160,6 +159,57 @@
   .foot-in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;font-size:13.5px;color:var(--muted)}
   .foot-in .mono{font-size:12.5px}
 </style>
+
+<link rel="canonical" href="https://budprocess.com/">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://budprocess.com/">
+<meta property="og:site_name" content="BudProcess">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:title" content="BudProcess — аналіз цін та комерційні пропозиції для будівництва">
+<meta property="og:description" content="Надсилаєте кошторис — отримуєте готовий комплект цінової документації для ЄДЕССБ та експертизи. Від 15 000 грн. Вся Україна, дистанційно.">
+<meta property="og:image" content="https://budprocess.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BudProcess — аналіз цін та комерційні пропозиції для будівництва">
+<meta name="twitter:description" content="Готовий комплект цінової документації для ЄДЕССБ та експертизи. Від 15 000 грн.">
+<meta name="twitter:image" content="https://budprocess.com/og-image.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "BudProcess",
+  "url": "https://budprocess.com/",
+  "image": "https://budprocess.com/og-image.jpg",
+  "description": "Підготовка цінової документації для будівництва: комерційні пропозиції на матеріали та звіт з аналізу цін для ЄДЕССБ і експертизи.",
+  "telephone": "+380663914479",
+  "priceRange": "від 15000 UAH",
+  "areaServed": { "@type": "Country", "name": "Україна" },
+  "availableLanguage": ["uk"],
+  "address": { "@type": "PostalAddress", "addressCountry": "UA" },
+  "makesOffer": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Комплект цінової документації: комерційні пропозиції та звіт з аналізу цін"
+    },
+    "priceCurrency": "UAH",
+    "price": "15000"
+  }
+}
+</script>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LT3V3W7FC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LT3V3W7FC');
+</script>
 </head>
 <body>
 
@@ -329,6 +379,18 @@ document.querySelectorAll('a[href^="#"]').forEach(function(link){
 if(location.hash){
   history.replaceState(null, '', location.pathname + location.search);
 }
+</script>
+
+<script>
+document.addEventListener('click', function(e){
+  var a = e.target.closest('a');
+  if(!a || typeof gtag !== 'function') return;
+  var h = a.getAttribute('href') || '';
+  if(h.indexOf('tel:') === 0) gtag('event','click_phone');
+  else if(h.indexOf('t.me') > -1) gtag('event','click_telegram');
+  else if(h.indexOf('viber:') === 0) gtag('event','click_viber');
+  else if(h.indexOf('wa.me') > -1) gtag('event','click_whatsapp');
+});
 </script>
 </body>
 </html>
