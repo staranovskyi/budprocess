@@ -41,6 +41,8 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.92);backdro
 .nav a{text-decoration:none;color:var(--muted);padding:6px 0;border-bottom:2px solid transparent;transition:color .13s ease,border-color .13s ease}
 .nav a:hover{color:var(--ink)}
 .nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--amber)}
+.nav a.nav-app{background:var(--amber-soft);color:#8a6400;padding:7px 13px;border-radius:999px;border-bottom:0;font-weight:600;transition:background .13s ease,color .13s ease}
+.nav a.nav-app:hover{background:var(--amber);color:var(--ink)}
 .head-phone{text-align:right;line-height:1.2}
 .hp-num{text-decoration:none;display:inline-block}
 .hp-num b{font-size:16px;white-space:nowrap}
@@ -68,6 +70,13 @@ h1{font-size:clamp(32px,5.4vw,56px);line-height:1.1;font-weight:700;letter-spaci
 .btn-line{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
 .btn-line:hover{transform:translateY(-2px);border-color:var(--ink)}
 .hero-note{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted);margin-top:24px}
+.sticky-cta{display:none}
+@media(max-width:720px){
+.sticky-cta{display:flex;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(251,250,246,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .2s ease}
+.sticky-cta.on{transform:none}
+.sticky-cta .btn{flex:1;padding:13px 10px;font-size:15px}
+body.has-sticky{padding-bottom:74px}
+}
 section{padding:32px 0}
 @media(max-width:720px){section{padding:24px 0}}
 .sec-label{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-dark);font-weight:600;margin-bottom:10px}
@@ -210,6 +219,7 @@ gtag('config', 'G-2LT3V3W7FC');
 <a href="/analiz-tsin">Аналіз цін</a>
 <a href="/koshtorysy" aria-current="page">Кошториси</a>
 <a href="#contact" class="nav-hide">Контакти</a>
+<a class="nav-app" href="https://app.budprocess.com/">Онлайн-сервіс</a>
 </nav>
 <div class="head-phone">
 <a class="hp-num" href="tel:+380663914479"><b>+380 66 391 44 79</b></a>
@@ -324,6 +334,10 @@ gtag('config', 'G-2LT3V3W7FC');
 </div>
 </section>
 </main>
+<div class="sticky-cta" id="sticky" aria-hidden="true">
+<a class="btn btn-amber" href="#contact">Надіслати документи</a>
+<a class="btn btn-line" href="tel:+380663914479">Подзвонити</a>
+</div>
 <footer>
 <div class="wrap foot-in">
 <div><b>BudProcess</b> · Кошторисна та цінова документація для будівництва · © 2026 · budprocess.com</div>
@@ -341,11 +355,24 @@ target.scrollIntoView({behavior:'smooth', block:'start'});
 });
 });
 if(location.hash){ history.replaceState(null, '', location.pathname + location.search); }
+(function(){
+var st = document.getElementById('sticky'), hero = document.querySelector('.hero'), contact = document.getElementById('contact');
+if(!st || !hero) return;
+function upd(){
+var past = window.scrollY > hero.offsetTop + hero.offsetHeight - 80;
+var atContact = contact && contact.getBoundingClientRect().top < window.innerHeight * 0.6;
+var on = past && !atContact;
+st.classList.toggle('on', on); st.setAttribute('aria-hidden', on ? 'false' : 'true');
+document.body.classList.toggle('has-sticky', on);
+}
+window.addEventListener('scroll', upd, {passive:true}); window.addEventListener('resize', upd); upd();
+})();
 document.addEventListener('click', function(e){
 var a = e.target.closest('a');
 if(!a || typeof gtag !== 'function') return;
 var h = a.getAttribute('href') || '';
-if(h.indexOf('tel:') === 0) gtag('event','click_phone');
+if(h.indexOf('app.budprocess.com') > -1) gtag('event','click_app');
+else if(h.indexOf('tel:') === 0) gtag('event','click_phone');
 else if(h.indexOf('t.me') > -1) gtag('event','click_telegram');
 else if(h.indexOf('viber:') === 0) gtag('event','click_viber');
 else if(h.indexOf('wa.me') > -1) gtag('event','click_whatsapp');

@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1A2230">
-<meta name="description" content="BudProcess — аналіз цін на матеріальні ресурси для ЄДЕССБ, складання та перевірка кошторисів. Надсилаєте вихідні дані — отримуєте готовий комплект документів. Оцінка безкоштовна. Вся Україна, дистанційно.">
+<meta name="description" content="BudProcess — аналіз цін для ЄДЕССБ онлайн 8 грн за рядок або під ключ, складання та перевірка кошторисів. Перші 500 грн за наш рахунок. Вся Україна, дистанційно.">
 <meta name="keywords" content="кошторисна документація, аналіз цін ЄДЕССБ, складання кошторисів, перевірка кошторисів, комерційні пропозиції на матеріали, Настанова 591, BudProcess">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,6 +41,8 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.92);backdro
 .nav a{text-decoration:none;color:var(--muted);padding:6px 0;border-bottom:2px solid transparent;transition:color .13s ease,border-color .13s ease}
 .nav a:hover{color:var(--ink)}
 .nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--amber)}
+.nav a.nav-app{background:var(--amber-soft);color:#8a6400;padding:7px 13px;border-radius:999px;border-bottom:0;font-weight:600;transition:background .13s ease,color .13s ease}
+.nav a.nav-app:hover{background:var(--amber);color:var(--ink)}
 .head-phone{text-align:right;line-height:1.2}
 .hp-num{text-decoration:none;display:inline-block}
 .hp-num b{font-size:16px;white-space:nowrap}
@@ -68,6 +70,13 @@ h1{font-size:clamp(32px,5.4vw,56px);line-height:1.1;font-weight:700;letter-spaci
 .btn-line{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
 .btn-line:hover{transform:translateY(-2px);border-color:var(--ink)}
 .hero-note{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted);margin-top:24px}
+.sticky-cta{display:none}
+@media(max-width:720px){
+.sticky-cta{display:flex;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(251,250,246,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .2s ease}
+.sticky-cta.on{transform:none}
+.sticky-cta .btn{flex:1;padding:13px 10px;font-size:15px}
+body.has-sticky{padding-bottom:74px}
+}
 section{padding:32px 0}
 @media(max-width:720px){section{padding:24px 0}}
 .sec-label{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-dark);font-weight:600;margin-bottom:10px}
@@ -116,6 +125,11 @@ h2{font-size:clamp(24px,3.4vw,34px);font-weight:700;letter-spacing:-.01em;margin
 .svc-card .tag{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;color:var(--amber-dark);text-transform:uppercase;margin-bottom:12px}
 .svc-card h3{font-size:21px;font-weight:600;margin-bottom:10px}
 .svc-card p{font-size:15px;color:var(--muted);margin-bottom:18px}
+.svc-ways{list-style:none;margin:0 0 18px;display:grid;gap:10px}
+.svc-ways li{display:grid;grid-template-columns:1fr auto;gap:6px 16px;align-items:start;padding:12px 14px;background:var(--paper);border-radius:12px;font-size:14.5px;color:var(--muted);line-height:1.5}
+.svc-ways li b{color:var(--ink)}
+.svc-ways li span{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:14px;color:var(--ink);white-space:nowrap;padding-top:1px}
+@media(max-width:560px){.svc-ways li{grid-template-columns:1fr}}
 .svc-foot{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .svc-price{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:15px}
 .svc-more{font-weight:600;color:var(--amber-dark)}
@@ -170,7 +184,7 @@ details p{padding:0 22px 18px;color:var(--muted,#5E6B76);font-size:15.5px;max-wi
 <meta property="og:site_name" content="BudProcess">
 <meta property="og:locale" content="uk_UA">
 <meta property="og:title" content="BudProcess — кошторисна та цінова документація для будівництва">
-<meta property="og:description" content="Аналіз цін для ЄДЕССБ, складання та перевірка кошторисів. Оцінка безкоштовна. Вся Україна, дистанційно.">
+<meta property="og:description" content="Аналіз цін для ЄДЕССБ онлайн 8 грн за рядок або під ключ, складання та перевірка кошторисів. Перші 500 грн за наш рахунок. Вся Україна, дистанційно.">
 <meta property="og:image" content="https://budprocess.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -191,6 +205,9 @@ details p{padding:0 22px 18px;color:var(--muted,#5E6B76);font-size:15.5px;max-wi
 "availableLanguage": ["uk"],
 "address": { "@type": "PostalAddress", "addressCountry": "UA" },
 "makesOffer": [
+ { "@type": "Offer", "url": "https://app.budprocess.com/", "priceCurrency": "UAH", "price": "8",
+   "priceSpecification": { "@type": "UnitPriceSpecification", "price": "8", "priceCurrency": "UAH", "unitText": "рядок відомості ресурсів" },
+   "itemOffered": { "@type": "Service", "name": "Онлайн-сервіс аналізу цін для ЄДЕССБ" } },
  { "@type": "Offer", "url": "https://budprocess.com/analiz-tsin", "priceCurrency": "UAH", "price": "5000",
    "itemOffered": { "@type": "Service", "name": "Аналіз цін та комерційні пропозиції на матеріальні ресурси" } },
  { "@type": "Offer", "url": "https://budprocess.com/koshtorysy", "priceCurrency": "UAH", "price": "2000",
@@ -218,6 +235,7 @@ gtag('config', 'G-2LT3V3W7FC');
 <a href="/analiz-tsin">Аналіз цін</a>
 <a href="/koshtorysy">Кошториси</a>
 <a href="#contact" class="nav-hide">Контакти</a>
+<a class="nav-app" href="https://app.budprocess.com/">Онлайн-сервіс</a>
 </nav>
 <div class="head-phone">
 <a class="hp-num" href="tel:+380663914479"><b>+380 66 391 44 79</b></a>
@@ -233,11 +251,12 @@ gtag('config', 'G-2LT3V3W7FC');
 <div class="hero">
 <span class="kicker">Дистанційно<svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 6h9M7.2 2.8 10.5 6l-3.3 3.2"/></svg>по всій Україні</span>
 <h1>Кошторисна та цінова документація для будівництва</h1>
-<p class="pitch">Надсилаєте вихідні дані — отримуєте готовий комплект документів. Оцінка обсягу безкоштовна, вартість і строк фіксуємо в договорі до початку роботи.</p>
+<p class="pitch">Аналіз цін для ЄДЕССБ — <b>самостійно в онлайн-сервісі</b> за кілька годин, перші 500 грн за наш рахунок. Кошториси й аналіз цін під ключ — надсилаєте вихідні дані, отримуєте готовий комплект документів.</p>
 <div class="cta-row">
-<a class="btn btn-amber" href="#contact">Надіслати документи</a>
-<a class="btn btn-line" href="tel:+380663914479">Подзвонити</a>
+<a class="btn btn-amber" href="https://app.budprocess.com/">Зробити аналіз цін онлайн</a>
+<a class="btn btn-line" href="#contact">Надіслати документи</a>
 </div>
+<p class="hero-note">Онлайн — 8 грн за рядок відомості · Під ключ — оцінка безкоштовна · Вся Україна, дистанційно</p>
 </div>
 
 <section id="services">
@@ -248,8 +267,11 @@ gtag('config', 'G-2LT3V3W7FC');
 <a class="svc-card" href="/analiz-tsin">
 <div class="tag">ЄДЕССБ · Настанова № 591</div>
 <h3>Аналіз цін на матеріальні ресурси</h3>
-<p>Дані для звіту з аналізу цін на матеріальні ресурси: перелік матеріалів під комерційні пропозиції, структуроване зведення цін, завантаження в ЄДЕССБ.</p>
-<div class="svc-foot"><span class="svc-price">від 5 000 грн</span><span class="svc-more">Детальніше</span></div>
+<ul class="svc-ways">
+<li><div><b>Онлайн</b> — завантажуєте відомість ресурсів, за кілька годин отримуєте коди КБП, джерела цін і три обмінні файли для ЄДЕССБ.</div><span>8 грн за рядок</span></li>
+<li><div><b>Під ключ</b> — комплект готує наш спеціаліст, за дорученням завантажуємо в ЄДЕССБ.</div><span>від 5 000 грн</span></li>
+</ul>
+<div class="svc-foot"><span class="svc-price">перші 500 грн онлайн — за наш рахунок</span><span class="svc-more">Детальніше</span></div>
 </a>
 <a class="svc-card" href="/koshtorysy">
 <div class="tag">Складання · Перевірка</div>
@@ -268,7 +290,7 @@ gtag('config', 'G-2LT3V3W7FC');
 <div class="steps" style="--cols:4">
 <div class="step"><span class="step-num">1</span><h3>Надсилаєте вихідні дані</h3><p>У будь-якому форматі — у месенджер або на пошту.</p></div>
 <div class="step"><span class="step-num">2</span><h3>Оцінюємо безкоштовно</h3><p>Називаємо вартість і строк. Оцінка ні до чого не зобов'язує.</p></div>
-<div class="step"><span class="step-num">3</span><h3>Заключаємо договір</h3><p>Вартість і строк фіксуємо до початку роботи.</p></div>
+<div class="step"><span class="step-num">3</span><h3>Укладаємо договір</h3><p>Вартість і строк фіксуємо до початку роботи.</p></div>
 <div class="step"><span class="step-num">4</span><h3>Отримуєте документи</h3><p>Готовий комплект у погоджений строк.</p></div>
 </div>
 <div class="b-card eng eng-wide">
@@ -322,6 +344,10 @@ gtag('config', 'G-2LT3V3W7FC');
 </section>
 
 </main>
+<div class="sticky-cta" id="sticky" aria-hidden="true">
+<a class="btn btn-amber" href="https://app.budprocess.com/">Онлайн-сервіс</a>
+<a class="btn btn-line" href="#contact">Написати</a>
+</div>
 <footer>
 <div class="wrap foot-in">
 <div><b>BudProcess</b> · Кошторисна та цінова документація для будівництва · © 2026 · budprocess.com</div>
@@ -339,11 +365,24 @@ target.scrollIntoView({behavior:'smooth', block:'start'});
 });
 });
 if(location.hash){ history.replaceState(null, '', location.pathname + location.search); }
+(function(){
+var st = document.getElementById('sticky'), hero = document.querySelector('.hero'), contact = document.getElementById('contact');
+if(!st || !hero) return;
+function upd(){
+var past = window.scrollY > hero.offsetTop + hero.offsetHeight - 80;
+var atContact = contact && contact.getBoundingClientRect().top < window.innerHeight * 0.6;
+var on = past && !atContact;
+st.classList.toggle('on', on); st.setAttribute('aria-hidden', on ? 'false' : 'true');
+document.body.classList.toggle('has-sticky', on);
+}
+window.addEventListener('scroll', upd, {passive:true}); window.addEventListener('resize', upd); upd();
+})();
 document.addEventListener('click', function(e){
 var a = e.target.closest('a');
 if(!a || typeof gtag !== 'function') return;
 var h = a.getAttribute('href') || '';
-if(h.indexOf('tel:') === 0) gtag('event','click_phone');
+if(h.indexOf('app.budprocess.com') > -1) gtag('event','click_app');
+else if(h.indexOf('tel:') === 0) gtag('event','click_phone');
 else if(h.indexOf('t.me') > -1) gtag('event','click_telegram');
 else if(h.indexOf('viber:') === 0) gtag('event','click_viber');
 else if(h.indexOf('wa.me') > -1) gtag('event','click_whatsapp');
