@@ -34,6 +34,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.92);backdro
 .logo{display:flex;align-items:center;gap:11px;text-decoration:none}
 .logo-tile{width:38px;height:38px;background:var(--ink);border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;font-weight:700;font-size:21px;position:relative;overflow:hidden}
 .logo-tile::after{content:"";position:absolute;top:0;right:0;width:12px;height:12px;background:linear-gradient(225deg,transparent 0 50%,var(--amber) 50% 100%)}
+.logo-img{width:38px;height:38px;flex:none;display:block}
 .logo-name{font-weight:700;font-size:19px}
 .logo-name span{color:var(--amber-dark)}
 .nav{display:flex;gap:26px;align-items:center;font-size:15.5px;font-weight:500}
@@ -202,7 +203,7 @@ gtag('config', 'G-2LT3V3W7FC');
 <header>
 <div class="wrap head-in">
 <a class="logo" href="/" aria-label="BudProcess — головна">
-<span class="logo-tile">B</span>
+<img class="logo-img" src="/icon-192.png" width="38" height="38" alt="">
 <span class="logo-name">Bud<span>Process</span></span>
 </a>
 <nav class="nav" aria-label="Розділи сайту">
