@@ -1,0 +1,5 @@
+# GitHub Pages (Jekyll): джерела довідника і скрипт збірки на сайт не публікуються
+exclude:
+  - content
+  - tools
+  - README.md

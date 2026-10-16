@@ -51,6 +51,8 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.92);backdro
 .head-msgr svg{display:block}
 .head-msgr a:hover{color:var(--ink)}
 @media(max-width:820px){.nav{gap:16px;font-size:14.5px}.nav .nav-hide{display:none}}
+.nav a{white-space:nowrap}
+@media(max-width:900px){.head-in{flex-wrap:wrap}.nav{order:3;width:100%;justify-content:flex-start;gap:18px;padding-top:4px}.nav a.nav-app{padding:6px 11px}}
 @media(max-width:560px){.hp-num b{font-size:14.5px}.head-msgr{gap:13px}.head-msgr svg{width:20px;height:20px}.head-in{flex-wrap:wrap}.nav{order:3;width:100%;justify-content:flex-start;gap:18px;padding-top:4px}}
 .hero{position:relative;text-align:center;padding:52px 32px 40px;overflow:hidden}
 @media(max-width:720px){.hero{padding:32px 20px 28px;text-align:left}}
@@ -218,6 +220,7 @@ gtag('config', 'G-2LT3V3W7FC');
 <nav class="nav" aria-label="Розділи сайту">
 <a href="/analiz-tsin">Аналіз цін</a>
 <a href="/koshtorysy" aria-current="page">Кошториси</a>
+<a href="/dovidnyk/">Довідник</a>
 <a href="#contact" class="nav-hide">Контакти</a>
 <a class="nav-app" href="https://app.budprocess.com/">Онлайн-сервіс</a>
 </nav>
@@ -341,7 +344,7 @@ gtag('config', 'G-2LT3V3W7FC');
 <footer>
 <div class="wrap foot-in">
 <div><b>BudProcess</b> · Кошторисна та цінова документація для будівництва · © 2026 · budprocess.com</div>
-<div class="foot-links"><a href="/">Головна</a><a href="/analiz-tsin">Аналіз цін</a><a href="/koshtorysy">Кошториси</a><a class="mono" href="mailto:budprocess@gmail.com">budprocess@gmail.com</a></div>
+<div class="foot-links"><a href="/">Головна</a><a href="/analiz-tsin">Аналіз цін</a><a href="/koshtorysy">Кошториси</a><a href="/dovidnyk/">Довідник</a><a class="mono" href="mailto:budprocess@gmail.com">budprocess@gmail.com</a></div>
 </div>
 </footer>
 <script>
