@@ -223,7 +223,7 @@ details p{padding:0 22px 18px;color:var(--muted,#5E6B76);font-size:15.5px;max-wi
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-2LT3V3W7FC');
+gtag('config', 'G-2LT3V3W7FC', {linker: {domains: ['budprocess.com', 'app.budprocess.com']}});
 </script>
 </head>
 <body>
@@ -384,7 +384,12 @@ document.addEventListener('click', function(e){
 var a = e.target.closest('a');
 if(!a || typeof gtag !== 'function') return;
 var h = a.getAttribute('href') || '';
-if(h.indexOf('app.budprocess.com') > -1) gtag('event','click_app');
+if(h.indexOf('app.budprocess.com') > -1){
+var place = a.closest('header') ? 'nav' : a.closest('.sticky-cta') ? 'sticky' : a.closest('.hero') ? 'hero'
+  : a.closest('.way-main') ? 'card' : a.closest('.cmp') ? 'compare' : a.closest('.price-online') ? 'price'
+  : a.closest('.cta-box') ? 'guide_cta' : a.closest('article') ? 'guide_text' : a.closest('.svc-card') ? 'service_card' : 'other';
+gtag('event','click_app',{place: place, page: location.pathname});
+}
 else if(h.indexOf('tel:') === 0) gtag('event','click_phone');
 else if(h.indexOf('t.me') > -1) gtag('event','click_telegram');
 else if(h.indexOf('viber:') === 0) gtag('event','click_viber');
