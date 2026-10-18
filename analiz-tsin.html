@@ -53,6 +53,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.92);backdro
 @media(max-width:820px){.nav{gap:16px;font-size:14.5px}.nav .nav-hide{display:none}}
 .nav a{white-space:nowrap}
 @media(max-width:900px){.head-in{flex-wrap:wrap}.nav{order:3;width:100%;justify-content:flex-start;gap:18px;padding-top:4px}.nav a.nav-app{padding:6px 11px}}
+@media(max-width:560px){.nav{flex-wrap:wrap;gap:8px 14px;font-size:14px}.nav a{padding:4px 0}.nav a.nav-app{padding:5px 10px;font-size:13.5px}}
 @media(max-width:560px){.hp-num b{font-size:14.5px}.head-msgr{gap:13px}.head-msgr svg{width:20px;height:20px}.head-in{flex-wrap:wrap}.nav{order:3;width:100%;justify-content:flex-start;gap:18px;padding-top:4px}}
 .hero{position:relative;text-align:center;padding:52px 32px 40px;overflow:hidden}
 @media(max-width:720px){.hero{padding:32px 20px 28px;text-align:left}}
@@ -135,6 +136,15 @@ body.has-sticky{padding-bottom:74px}
 .why-card h3{font-size:17px;font-weight:600;margin-bottom:8px}
 .why-card p{font-size:15px;color:var(--muted)}
 .svc{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.clients{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media(max-width:1000px){.clients{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:820px){.clients{grid-template-columns:1fr 1fr}}
+.client{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px 18px 18px;box-shadow:var(--shadow);transition:transform .13s ease,border-color .13s ease}
+.client:hover{transform:translateY(-2px);border-color:var(--amber)}
+.client .lg{height:56px;display:flex;align-items:center;justify-content:center;width:100%}
+.client img{max-height:56px;max-width:100%;width:auto;height:auto;opacity:.82;transition:opacity .13s ease}
+.client:hover img{opacity:1}
+.client span{font-size:13.5px;color:var(--muted);text-align:center;line-height:1.35}
 @media(max-width:820px){.svc{grid-template-columns:1fr}}
 .svc-card{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .13s ease,border-color .13s ease}
 .svc-card::after{content:"";position:absolute;top:0;right:0;width:40px;height:40px;background:linear-gradient(225deg,transparent 0 50%,var(--amber) 50% 100%)}
@@ -370,6 +380,20 @@ gtag('config', 'G-2LT3V3W7FC', {linker: {domains: ['budprocess.com', 'app.budpro
 <div class="years">15+</div>
 <div class="cap">років у будівельній галузі</div>
 </div>
+</div>
+</div>
+</section>
+
+<section id="clients">
+<div class="wrap">
+<div class="sec-label">Клієнти</div>
+<h2>З нами працюють</h2>
+<div class="clients">
+<a class="client" href="http://www.ntu.edu.ua/" target="_blank" rel="noopener nofollow"><span class="lg"><img src="/img/clients/ntu.png" width="136" height="120" alt="Національний транспортний університет" loading="lazy"></span><span>Національний транспортний університет</span></a>
+<a class="client" href="https://ukexpertyza.com.ua/" target="_blank" rel="noopener nofollow"><span class="lg"><img src="/img/clients/ukexpertyza.png" width="501" height="120" alt="УК Експертиза" loading="lazy"></span><span>УК Експертиза, експертиза проєктної документації</span></a>
+<a class="client" href="https://ukproekt.com.ua/" target="_blank" rel="noopener nofollow"><span class="lg"><img src="/img/clients/ukproekt.png" width="121" height="120" alt="УК Проект" loading="lazy"></span><span>УК Проект, проєктна організація</span></a>
+<a class="client" href="https://www.proektia.com/" target="_blank" rel="noopener nofollow"><span class="lg"><img src="/img/clients/proektia.png" width="120" height="120" alt="Проєктія" loading="lazy"></span><span>Проєктія, проєктування та обстеження будівель</span></a>
+<a class="client" href="https://mezhyhiria.mepr.gov.ua/" target="_blank" rel="noopener nofollow"><span class="lg"><img src="/img/clients/mezhyhiria.png" width="524" height="120" alt="Парк-пам'ятка «Межигір'я»" loading="lazy"></span><span>Парк-пам'ятка «Межигір'я»</span></a>
 </div>
 </div>
 </section>
