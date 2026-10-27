@@ -65,9 +65,11 @@ ARTICLE_CSS = """
 .more a{font-weight:600}
 .idx{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
 @media(max-width:720px){.idx{grid-template-columns:1fr}}
-.idx a{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--shadow);transition:transform .13s ease,border-color .13s ease}
+.idx a{display:flex;flex-direction:column;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:transform .13s ease,border-color .13s ease}
 .idx a:hover{transform:translateY(-2px);border-color:var(--amber)}
-.idx h3{font-size:17px;font-weight:600;margin:0 0 6px}
+.idx img,.idx .noimg{display:block;width:100%;aspect-ratio:16/8;object-fit:cover;object-position:top left;background:var(--paper);border-bottom:1px solid var(--line)}
+.idx a>div{padding:18px 22px 22px}
+.idx h3{font-size:17px;font-weight:600;margin:0 0 6px;color:var(--ink)}
 .idx p{font-size:14.5px;color:var(--muted);margin:0}
 """
 
@@ -213,7 +215,11 @@ def page(meta, body, others):
 
 
 def index(pages):
-    cards = "".join(f'<a href="/dovidnyk/{m["slug"]}"><h3>{m["h1"]}</h3><p>{m["lead"]}</p></a>' for m, _ in pages)
+    cards = "".join(
+        f'<a href="/dovidnyk/{m["slug"]}">'
+        + (f'<img src="{m["image"]}" alt="" loading="lazy">' if m.get("image") else '<span class="noimg"></span>')
+        + f'<div><h3>{m.get("card_title", m["h1"])}</h3><p>{m.get("card", m["lead"])}</p></div></a>'
+        for m, _ in pages)
     url = SITE + "/dovidnyk/"
     title = "Довідник з аналізу цін і ЄДЕССБ"
     desc = "Аналіз цін для ЄДЕССБ крок за кроком: підбір джерел і цінових пропозицій, коди КБП, ранжування 60/30/10, обмінні файли та їх завантаження в ЄДЕССБ."
