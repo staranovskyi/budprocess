@@ -58,6 +58,15 @@ ARTICLE_CSS = """
 .cta-box .gift{display:inline-block;margin-left:10px;background:var(--amber);color:var(--ink);font-weight:700;font-size:13.5px;padding:5px 11px;border-radius:999px;vertical-align:middle}
 @media(max-width:560px){.cta-box{padding:24px 20px}.cta-box .gift{margin:10px 0 0}}
 .art .faq{margin-top:12px}
+.step-h{display:flex;align-items:center;gap:14px;margin:40px 0 10px}
+.step-h .n{flex:none;width:40px;height:40px;border-radius:12px;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:18px}
+.step-h h2{margin:0}
+.art .do{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:0 12px 12px 0;padding:12px 18px;margin:0 0 14px;font-size:15.5px}
+.art .do b{color:#8a6400}
+.art .toc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:0 0 8px}
+.art .toc ol{margin:8px 0 0 20px;columns:2;column-gap:28px}
+@media(max-width:560px){.art .toc ol{columns:1}}
+.art .toc li{margin:0 0 4px;font-size:15px;break-inside:avoid}
 .more{margin:40px 0 0;padding-top:24px;border-top:1px solid var(--line)}
 .more h2{font-size:18px;margin:0 0 12px}
 .more ul{list-style:none;margin:0;padding:0}
@@ -143,7 +152,9 @@ def parse(path):
 
 
 def page(meta, body, others):
-    slug = meta["slug"]; url = f"{SITE}/dovidnyk/{slug}"
+    slug = meta["slug"]
+    standalone = meta.get("kind") == "page"
+    url = f"{SITE}/{slug}" if standalone else f"{SITE}/dovidnyk/{slug}"
     ld = {
         "@context": "https://schema.org",
         "@graph": [
@@ -154,10 +165,13 @@ def page(meta, body, others):
              "image": SITE + meta.get("image", "/og-image.jpg")},
             {"@type": "BreadcrumbList", "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Головна", "item": SITE + "/"},
-                {"@type": "ListItem", "position": 2, "name": "Довідник", "item": SITE + "/dovidnyk/"},
-                {"@type": "ListItem", "position": 3, "name": meta.get("short", meta["h1"]), "item": url}]},
+                *([] if standalone else [{"@type": "ListItem", "position": 2, "name": "Довідник", "item": SITE + "/dovidnyk/"}]),
+                {"@type": "ListItem", "position": 2 if standalone else 3, "name": meta.get("short", meta["h1"]), "item": url}]},
         ]}
     more = "".join(f'<li><a href="/dovidnyk/{o["slug"]}">{o["h1"]}</a></li>' for o in others)
+    more_block = "" if standalone else f'<div class="more"><h2>Ще в довіднику</h2><ul>{more}</ul></div>'
+    crumbs = (f'<a href="/">Головна</a> → {meta.get("short", meta["h1"])}' if standalone
+              else f'<a href="/">Головна</a> → <a href="/dovidnyk/">Довідник</a> → {meta.get("short", meta["h1"])}')
     return f"""<!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -193,17 +207,17 @@ def page(meta, body, others):
 {GA}
 </head>
 <body>
-{header("dovidnyk")}
+{header("" if standalone else "dovidnyk")}
 <main>
 <div class="wrap">
 <article class="art">
-<div class="crumbs"><a href="/">Головна</a> → <a href="/dovidnyk/">Довідник</a> → {meta.get("short", meta["h1"])}</div>
+<div class="crumbs">{crumbs}</div>
 <h1>{meta["h1"]}</h1>
 <p class="lead">{meta["lead"]}</p>
 <div class="meta"><img class="ava" src="/img/author.webp" width="28" height="28" alt="">{AUTHOR["name"]}, {AUTHOR["role"]} · Оновлено {human(meta.get("updated", meta.get("date", "2026-10-15")))} · {meta.get("read", "7")} хв читання</div>
 {body.strip()}
-{CTA}
-<div class="more"><h2>Ще в довіднику</h2><ul>{more}</ul></div>
+{'' if standalone else CTA}
+{more_block}
 </article>
 </div>
 </main>
@@ -259,7 +273,6 @@ def index(pages):
 <h1>Довідник: аналіз цін для ЄДЕССБ</h1>
 <p class="lead">Аналіз цін — фактично це процес підбору джерел і цінових пропозицій, кодів КБП, формування обмінних файлів і завантаження їх у ЄДЕССБ. У довіднику розібрано кожен із цих кроків: що потрібно, звідки брати дані і де найчастіше помиляються.</p>
 <div class="idx">{cards}</div>
-{CTA}
 </article>
 </div>
 </main>
@@ -272,22 +285,30 @@ def index(pages):
 
 def main():
     OUT.mkdir(exist_ok=True)
-    pages = [parse(p) for p in sorted(SRC.glob("*.html"))]
+    allp = [parse(p) for p in sorted(SRC.glob("*.html"))]
+    standalone = [(m, b) for m, b in allp if m.get("kind") == "page"]
+    pages = [(m, b) for m, b in allp if m.get("kind") != "page"]
     pages.sort(key=lambda mb: int(mb[0].get("order", "99")))
     metas = [m for m, _ in pages]
     for m, body in pages:
         others = [o for o in metas if o["slug"] != m["slug"]]
         (OUT / f'{m["slug"]}.html').write_text(page(m, body, others), encoding="utf-8", newline="\n")
         print("built", m["slug"], "faq:", len(m["faq"]))
+    for m, body in standalone:
+        (ROOT / f'{m["slug"]}.html').write_text(page(m, body, []), encoding="utf-8", newline="\n")
+        print("built page", m["slug"])
     (OUT / "index.html").write_text(index(pages), encoding="utf-8", newline="\n")
     print("built index,", len(pages), "pages")
     # sitemap
     sm = ROOT / "sitemap.xml"
     txt = sm.read_text(encoding="utf-8")
     txt = re.sub(r"\s*<url><loc>https://budprocess.com/dovidnyk/.*?</url>", "", txt)
+    for m, _ in standalone:
+        txt = re.sub(r"\s*<url><loc>https://budprocess.com/" + re.escape(m["slug"]) + r"</loc>.*?</url>", "", txt)
     today = datetime.date.today().isoformat()
     rows = [f"  <url><loc>{SITE}/dovidnyk/</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>"]
     rows += [f'  <url><loc>{SITE}/dovidnyk/{m["slug"]}</loc><lastmod>{m.get("updated", m.get("date", today))}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>' for m in metas]
+    rows += [f'  <url><loc>{SITE}/{m["slug"]}</loc><lastmod>{m.get("updated", m.get("date", today))}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>' for m, _ in standalone]
     txt = txt.replace("</urlset>", "\n".join(rows) + "\n</urlset>")
     sm.write_text(txt, encoding="utf-8", newline="\n")
     print("sitemap updated")

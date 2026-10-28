@@ -181,6 +181,9 @@ body.has-sticky{padding-bottom:74px}
 .shot img{display:block;width:100%;height:auto}
 .shot figcaption{font-size:13.5px;color:var(--muted);padding:10px 18px 12px;border-top:1px solid var(--line)}
 @media(max-width:720px){.shot .scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}.shot img{min-width:680px}}
+.way-link{margin:14px 0 0;font-size:14.5px}
+.way-link a{color:var(--amber-dark);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;transition:color .13s ease}
+.way-link a:hover{color:var(--ink)}
 .way-note{font-size:14px;color:var(--muted);margin-top:16px;max-width:820px}
 .price-online{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--amber);border-radius:24px;padding:36px 44px;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;box-shadow:var(--shadow);margin-bottom:16px}
 @media(max-width:820px){.price-online{grid-template-columns:1fr;padding:28px;gap:20px}}
@@ -280,6 +283,15 @@ details p a:hover{color:var(--ink)}
 .cta-box .gift{display:inline-block;margin-left:10px;background:var(--amber);color:var(--ink);font-weight:700;font-size:13.5px;padding:5px 11px;border-radius:999px;vertical-align:middle}
 @media(max-width:560px){.cta-box{padding:24px 20px}.cta-box .gift{margin:10px 0 0}}
 .art .faq{margin-top:12px}
+.step-h{display:flex;align-items:center;gap:14px;margin:40px 0 10px}
+.step-h .n{flex:none;width:40px;height:40px;border-radius:12px;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:18px}
+.step-h h2{margin:0}
+.art .do{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:0 12px 12px 0;padding:12px 18px;margin:0 0 14px;font-size:15.5px}
+.art .do b{color:#8a6400}
+.art .toc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:0 0 8px}
+.art .toc ol{margin:8px 0 0 20px;columns:2;column-gap:28px}
+@media(max-width:560px){.art .toc ol{columns:1}}
+.art .toc li{margin:0 0 4px;font-size:15px;break-inside:avoid}
 .more{margin:40px 0 0;padding-top:24px;border-top:1px solid var(--line)}
 .more h2{font-size:18px;margin:0 0 12px}
 .more ul{list-style:none;margin:0;padding:0}
@@ -343,12 +355,6 @@ gtag('config', 'G-2LT3V3W7FC', {linker: {domains: ['budprocess.com', 'app.budpro
 <h1>Довідник: аналіз цін для ЄДЕССБ</h1>
 <p class="lead">Аналіз цін — фактично це процес підбору джерел і цінових пропозицій, кодів КБП, формування обмінних файлів і завантаження їх у ЄДЕССБ. У довіднику розібрано кожен із цих кроків: що потрібно, звідки брати дані і де найчастіше помиляються.</p>
 <div class="idx"><a href="/dovidnyk/zvit-z-analizu-tsin"><img src="/img/service-result.webp" alt="" loading="lazy"><div><h3>Звіт з аналізу цін на матеріальні ресурси: що це, коли потрібен і як скласти</h3><p>Що має бути у звіті, звідки брати ціни, скільки джерел потрібно на кожну позицію і які помилки найчастіше повертає перевірка в ЄДЕССБ.</p></div></a><a href="/dovidnyk/ranzhuvannya-60-30-10"><img src="/img/rlmt-avk.webp" alt="" loading="lazy"><div><h3>Ранжування 60/30/10: як поділити матеріальні ресурси і скільки джерел цін потрібно</h3><p>Правило поділу ресурсів на ціноутворюючі й неціноутворюючі, приклад розрахунку на восьми позиціях, межові випадки і що зміниться з серпня 2027 року.</p></div></a><a href="/dovidnyk/kody-kbp"><img src="/img/kbp-portal-search.webp" alt="" loading="lazy"><div><h3>Коди КБП: як підібрати код Кодифікатора будівельної продукції для матеріалу з кошторису</h3><p>Що таке код КБП, як влаштований Кодифікатор, яким позиціям код обов'язковий, як знайти правильну специфікацію і не помилитись з одиницею виміру.</p></div></a><a href="/dovidnyk/obminni-fayly-edessb"><img src="/img/edessb-templates.webp" alt="" loading="lazy"><div><h3>Обмінні файли ЄДЕССБ для звіту з аналізу цін: що в них і як заповнити</h3><p>Три файли xlsx, які імпортуються в кабінет ЄДЕССБ: з чого вони складаються, звідки брати шаблони, як заповнити джерела й постачальників і які перевірки проходить файл при імпорті.</p></div></a><a href="/dovidnyk/prays-lyst-z-bdcb"><img src="/img/bdcb-catalog.webp" alt="" loading="lazy"><div><h3>Прайс-лист з БДЦБ: що це таке і як використати його в аналізі цін для ЄДЕССБ</h3><p>Новий тип джерела ціни в ЄДЕССБ: що це за каталог, як шукати в ньому матеріал з відомості і коли брати ціну у звіт.</p></div></a></div>
-<div class="cta-box">
-<h2>Зробіть аналіз цін онлайн за кілька годин</h2>
-<p>Завантажте відомість ресурсів (ПВР або РЛМТ). Сервіс підбере коди КБП, знайде джерела цін і збере три обмінні файли для ЄДЕССБ.</p>
-<a class="btn btn-amber" href="https://app.budprocess.com/">Відкрити сервіс</a><span class="gift">Перші 500 грн — за наш рахунок</span>
-<p style="margin:18px 0 0;font-size:14px">Потрібен комплект під ключ зі спеціалістом? <a href="/analiz-tsin#contact">Надішліть кошторис</a>, оцінка безкоштовна.</p>
-</div>
 </article>
 </div>
 </main>
