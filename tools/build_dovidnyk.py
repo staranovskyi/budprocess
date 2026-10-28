@@ -13,7 +13,7 @@ BASE = (ROOT / "analiz-tsin.html").read_text(encoding="utf-8")
 SITE = "https://budprocess.com"
 
 ARTICLE_CSS = """
-.art{max-width:780px;margin:0 auto;padding:36px 0 8px}
+.art{max-width:780px;margin:0 auto;padding:36px 0 44px}
 .crumbs{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted);margin-bottom:18px}
 .crumbs a{text-decoration:none;color:var(--muted)}
 .crumbs a:hover{color:var(--ink)}
