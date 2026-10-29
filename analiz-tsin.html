@@ -527,6 +527,8 @@ window.addEventListener('scroll', upd, {passive:true}); window.addEventListener(
 document.addEventListener('click', function(e){
 var a = e.target.closest('a');
 if(!a || typeof gtag !== 'function') return;
+var kh = a.closest('.kbp-help');
+if(kh){ gtag('event','kbp_help_click',{place: kh.getAttribute('data-place') || '', channel: a.getAttribute('data-ch') || '', page: location.pathname}); return; }
 var h = a.getAttribute('href') || '';
 if(h.indexOf('app.budprocess.com') > -1){
 var place = a.closest('header') ? 'nav' : a.closest('.sticky-cta') ? 'sticky' : a.closest('.hero') ? 'hero'
@@ -539,6 +541,16 @@ else if(h.indexOf('t.me') > -1) gtag('event','click_telegram');
 else if(h.indexOf('viber:') === 0) gtag('event','click_viber');
 else if(h.indexOf('wa.me') > -1) gtag('event','click_whatsapp');
 });
+(function(){
+var els = document.querySelectorAll('.kbp-help');
+if(!els.length || !('IntersectionObserver' in window)) return;
+var io = new IntersectionObserver(function(es){ es.forEach(function(e){
+  if(!e.isIntersecting) return;
+  if(typeof gtag === 'function') gtag('event','kbp_help_view',{place: e.target.getAttribute('data-place') || '', page: location.pathname});
+  io.unobserve(e.target);
+}); }, {threshold: 0.6});
+els.forEach(function(el){ io.observe(el); });
+})();
 </script>
 </body>
 </html>

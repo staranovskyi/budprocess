@@ -45,6 +45,13 @@ ARTICLE_CSS = """
 .art .tblw{overflow-x:auto;margin:0 -4px}
 .art .note{background:var(--amber-soft);border-left:3px solid var(--amber);border-radius:0 12px 12px 0;padding:14px 18px;margin:18px 0;font-size:15px}
 .art .note b{color:#8a6400}
+.art .kbp-help{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px;margin:20px 0;font-size:15.5px}
+.art .kbp-help b{color:var(--ink)}
+.art .kbp-help .kh-b{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.art .kbp-help .kh-b a{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font-weight:600;font-size:14.5px;text-decoration:none;transition:border-color .13s ease,background .13s ease}
+.art .kbp-help .kh-b a:hover{border-color:var(--ink)}
+.art .kbp-help .kh-b a.kh-main{background:var(--amber);border-color:var(--amber)}
+.art .kbp-help .kh-b a.kh-main:hover{background:#e0a800;border-color:#e0a800}
 .art figure{margin:20px 0;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
 .art figure img{display:block;width:100%;height:auto}
 .art figcaption{font-size:13.5px;color:var(--muted);padding:10px 16px;border-top:1px solid var(--line)}
