@@ -52,6 +52,9 @@ ARTICLE_CSS = """
 .art .kbp-help .kh-b a:hover{border-color:var(--ink)}
 .art .kbp-help .kh-b a.kh-main{background:var(--amber);border-color:var(--amber)}
 .art .kbp-help .kh-b a.kh-main:hover{background:#e0a800;border-color:#e0a800}
+.art .kbp-help .kh-tel{margin-top:10px;font-size:14.5px;color:var(--muted)}
+.art .kbp-help .kh-tel a{color:var(--ink);font-weight:600;text-decoration:none;white-space:nowrap;transition:color .13s ease}
+.art .kbp-help .kh-tel a:hover{color:var(--amber-dark)}
 .art figure{margin:20px 0;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
 .art figure img{display:block;width:100%;height:auto}
 .art figcaption{font-size:13.5px;color:var(--muted);padding:10px 16px;border-top:1px solid var(--line)}
