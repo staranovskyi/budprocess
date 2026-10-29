@@ -216,7 +216,7 @@ def page(meta, body, others):
 <p class="lead">{meta["lead"]}</p>
 <div class="meta"><img class="ava" src="/img/author.webp" width="28" height="28" alt="">{AUTHOR["name"]}, {AUTHOR["role"]} · Оновлено {human(meta.get("updated", meta.get("date", "2026-10-15")))} · {meta.get("read", "7")} хв читання</div>
 {body.strip()}
-{'' if standalone else CTA}
+{'' if standalone or meta.get("cta") == "no" else CTA}
 {more_block}
 </article>
 </div>
