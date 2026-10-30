@@ -118,6 +118,7 @@ ARTICLE_CSS = """
 .idx a>div{padding:18px 22px 22px}
 .idx h3{font-size:17px;font-weight:600;margin:0 0 6px;color:var(--ink)}
 .idx p{font-size:14.5px;color:var(--muted);margin:0}
+.idx .new{display:inline-block;vertical-align:2px;margin-right:8px;padding:2px 8px;border-radius:999px;background:var(--amber);color:var(--ink);font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;letter-spacing:.02em}
 """
 
 AUTHOR = {"name": "Станіслав", "role": "засновник BudProcess"}
@@ -269,11 +270,20 @@ def page(meta, body, others):
 """
 
 
+NEW_DAYS = 14   # позначка «Нове» на картці статті в довіднику (рішення власника 2026-10-30)
+
+
+def new_badge(m):
+    """«Нове» перші NEW_DAYS днів від дати публікації; data-until — щоб скрипт сторінки сховав позначку й без перезбирання."""
+    until = datetime.date.fromisoformat(m.get("date", "2000-01-01")) + datetime.timedelta(days=NEW_DAYS)
+    return f'<span class="new" data-until="{until.isoformat()}">Нове</span>' if datetime.date.today() < until else ""
+
+
 def index(pages):
     cards = "".join(
         f'<a href="/dovidnyk/{m["slug"]}">'
         + (f'<img src="{m["image"]}" alt="" loading="lazy">' if m.get("image") else '<span class="noimg"></span>')
-        + f'<div><h3>{m.get("card_title", m["h1"])}</h3><p>{m.get("card", m["lead"])}</p></div></a>'
+        + f'<div><h3>{new_badge(m)}{m.get("card_title", m["h1"])}</h3><p>{m.get("card", m["lead"])}</p></div></a>'
         for m, _ in pages)
     url = SITE + "/dovidnyk/"
     title = "Довідник з аналізу цін і ЄДЕССБ"
@@ -314,6 +324,7 @@ def index(pages):
 <h1>Довідник: аналіз цін для ЄДЕССБ</h1>
 <p class="lead">Аналіз цін — фактично це процес підбору джерел і цінових пропозицій, кодів КБП, формування обмінних файлів і завантаження їх у ЄДЕССБ. У довіднику розібрано кожен із цих кроків: що потрібно, звідки брати дані і де найчастіше помиляються.</p>
 <div class="idx">{cards}</div>
+<script>(function(){{var d=new Date().toISOString().slice(0,10);document.querySelectorAll('.idx .new').forEach(function(s){{if(s.dataset.until<=d)s.remove()}})}})();</script>
 </article>
 </div>
 </main>
