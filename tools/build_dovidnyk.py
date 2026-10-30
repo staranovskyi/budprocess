@@ -155,8 +155,8 @@ def base_css():
 
 
 def header(active):
-    # «Контакти» в шапці «Аналізу цін» — якір на тій самій сторінці; тут такого розділу немає, тож ведемо туди (2026-10-30)
-    h = section(BASE, "header").replace(' aria-current="page"', "").replace('href="#contact"', 'href="/analiz-tsin#contact"')
+    # «Контакти» в меню — окрема сторінка /kontakty (2026-10-30; до того якір #contact, на сторінках довідника його не було)
+    h = section(BASE, "header").replace(' aria-current="page"', "").replace('href="#contact" class="nav-hide"', 'href="/kontakty" class="nav-hide"')
     cur = ' aria-current="page"' if active == "dovidnyk" else ""
     if '<a href="/dovidnyk/">Довідник</a>' in h:
         return h.replace('<a href="/dovidnyk/">Довідник</a>', f'<a href="/dovidnyk/"{cur}>Довідник</a>')
@@ -209,10 +209,15 @@ def page(meta, body, others):
                 *([] if standalone else [{"@type": "ListItem", "position": 2, "name": "Довідник", "item": SITE + "/dovidnyk/"}]),
                 {"@type": "ListItem", "position": 2 if standalone else 3, "name": meta.get("short", meta["h1"]), "item": url}]},
         ]}
+    if meta.get("schema") == "contact":   # сторінка «Контакти» (2026-10-30): не стаття, а ContactPage з реквізитами зв'язку
+        ld["@graph"][0] = {"@type": "ContactPage", "name": meta["title"], "description": meta["description"], "url": url, "inLanguage": "uk",
+                           "mainEntity": {"@type": "Organization", "name": "BudProcess", "url": SITE + "/", "telephone": "+380663914479",
+                                          "email": "budprocess@gmail.com", "sameAs": ["https://t.me/BudProcess"]}}
     if meta.get("faq"):   # питання з блоку <!--faq--> — і для пошуковиків (розмітка FAQPage), 2026-10-29
         ld["@graph"].append({"@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": unescape(q), "acceptedAnswer": {"@type": "Answer", "text": unescape(a)}} for q, a in meta["faq"]]})
     more = "".join(f'<li><a href="/dovidnyk/{o["slug"]}">{o["h1"]}</a></li>' for o in others)
+    byline = "" if meta.get("byline") == "no" else f'''<div class="meta"><img class="ava" src="/img/author.webp" width="28" height="28" alt="">{AUTHOR["name"]}, {AUTHOR["role"]} · Оновлено {human(meta.get("updated", meta.get("date", "2026-10-15")))} · {meta.get("read", "7")} хв читання</div>'''
     more_block = "" if standalone else f'<div class="more"><h2>Ще в довіднику</h2><ul>{more}</ul></div>'
     crumbs = (f'<a href="/">Головна</a> → {meta.get("short", meta["h1"])}' if standalone
               else f'<a href="/">Головна</a> → <a href="/dovidnyk/">Довідник</a> → {meta.get("short", meta["h1"])}')
@@ -258,7 +263,7 @@ def page(meta, body, others):
 <div class="crumbs">{crumbs}</div>
 <h1>{meta["h1"]}</h1>
 <p class="lead">{meta["lead"]}</p>
-<div class="meta"><img class="ava" src="/img/author.webp" width="28" height="28" alt="">{AUTHOR["name"]}, {AUTHOR["role"]} · Оновлено {human(meta.get("updated", meta.get("date", "2026-10-15")))} · {meta.get("read", "7")} хв читання</div>
+{byline}
 {body.strip()}
 {CTA if meta.get("cta") == "yes" and not standalone else ''}
 {more_block}
