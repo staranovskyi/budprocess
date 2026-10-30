@@ -82,7 +82,7 @@ ARTICLE_CSS = """
 .art .svc-form .hp{position:absolute;left:-9999px}
 .art .svc-form .svc-err{color:#9B2C2C;font-size:14px}
 .art .svc-form .svc-legal{font-size:13px;color:var(--muted)}
-.art .svc-ok{background:#EEF6F1;color:#1F5E46;border-radius:10px;padding:12px 16px;font-weight:600}
+.art .svc-ok{margin-top:16px;background:#EEF6F1;color:#1F5E46;border-radius:10px;padding:12px 16px;font-weight:600}
 .art figure{margin:20px 0;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
 .art figure img{display:block;width:100%;height:auto}
 .art figcaption{font-size:13.5px;color:var(--muted);padding:10px 16px;border-top:1px solid var(--line)}
