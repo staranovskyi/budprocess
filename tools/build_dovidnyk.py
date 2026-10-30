@@ -5,6 +5,7 @@
 Кожен файл у content/ починається з блоку метаданих (рядки "ключ: значення"), далі порожній рядок, далі тіло статті (HTML).
 """
 import json, re, sys, pathlib, datetime
+from html import unescape
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "content"
@@ -55,6 +56,33 @@ ARTICLE_CSS = """
 .art .kbp-help .kh-tel{margin-top:10px;font-size:14.5px;color:var(--muted)}
 .art .kbp-help .kh-tel a{color:var(--ink);font-weight:600;text-decoration:none;white-space:nowrap;transition:color .13s ease}
 .art .kbp-help .kh-tel a:hover{color:var(--amber-dark)}
+.art .letter{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:14px 0 18px;font-size:14.5px;line-height:1.6}
+.art .letter p{margin:0 0 10px}
+.art .letter table{font-size:13.5px;margin:8px 0 12px}
+.art .letter .muted{color:var(--muted)}
+.art a.btn-dl{display:inline-flex;align-items:center;gap:8px;margin:4px 0 18px;padding:10px 18px;border-radius:999px;background:var(--amber);color:var(--ink);font-weight:600;text-decoration:none;transition:background .13s ease}
+.art a.btn-dl:hover{background:#e0a800}
+.art .svc-kp{margin:36px 0 8px;background:var(--card);border:1px solid var(--line);border-top:3px solid var(--amber);border-radius:var(--r);padding:24px 26px;box-shadow:var(--shadow)}
+.art .svc-kp h2{margin:0 0 10px;font-size:22px}
+.art .svc-kp ol{margin:6px 0 12px 20px}
+.art .svc-kp .svc-note{font-size:14.5px;color:var(--muted)}
+.art .svc-kp .svc-price{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:18px;margin:4px 0 14px}
+.art .svc-kp button,.art .svc-kp .svc-form button{font:inherit;font-weight:600;padding:11px 22px;border-radius:999px;border:0;background:var(--amber);color:var(--ink);cursor:pointer;transition:background .13s ease}
+.art .svc-kp button:hover{background:#e0a800}
+.art .svc-kp button:disabled{opacity:.6;cursor:default}
+.art .svc-kp .svc-alt{margin:12px 0 0;font-size:14.5px;color:var(--muted)}
+.art .svc-kp .svc-alt a{color:var(--ink);font-weight:600;white-space:nowrap}
+.art .svc-form{display:grid;gap:12px;margin-top:6px}
+.art .svc-form[hidden],.art .svc-ok[hidden]{display:none}
+.art .svc-form label{display:grid;gap:5px;font-size:14px;font-weight:600}
+.art .svc-form label span{font-weight:400;color:var(--muted)}
+.art .svc-form input,.art .svc-form textarea{font:inherit;font-size:15px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.art .svc-form input:focus,.art .svc-form textarea:focus{outline:none;border-color:var(--amber)}
+.art .svc-form textarea{min-height:90px;resize:vertical}
+.art .svc-form .hp{position:absolute;left:-9999px}
+.art .svc-form .svc-err{color:#9B2C2C;font-size:14px}
+.art .svc-form .svc-legal{font-size:13px;color:var(--muted)}
+.art .svc-ok{background:#EEF6F1;color:#1F5E46;border-radius:10px;padding:12px 16px;font-weight:600}
 .art figure{margin:20px 0;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
 .art figure img{display:block;width:100%;height:auto}
 .art figcaption{font-size:13.5px;color:var(--muted);padding:10px 16px;border-top:1px solid var(--line)}
@@ -178,6 +206,9 @@ def page(meta, body, others):
                 *([] if standalone else [{"@type": "ListItem", "position": 2, "name": "Довідник", "item": SITE + "/dovidnyk/"}]),
                 {"@type": "ListItem", "position": 2 if standalone else 3, "name": meta.get("short", meta["h1"]), "item": url}]},
         ]}
+    if meta.get("faq"):   # питання з блоку <!--faq--> — і для пошуковиків (розмітка FAQPage), 2026-10-29
+        ld["@graph"].append({"@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": unescape(q), "acceptedAnswer": {"@type": "Answer", "text": unescape(a)}} for q, a in meta["faq"]]})
     more = "".join(f'<li><a href="/dovidnyk/{o["slug"]}">{o["h1"]}</a></li>' for o in others)
     more_block = "" if standalone else f'<div class="more"><h2>Ще в довіднику</h2><ul>{more}</ul></div>'
     crumbs = (f'<a href="/">Головна</a> → {meta.get("short", meta["h1"])}' if standalone

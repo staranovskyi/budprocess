@@ -282,6 +282,33 @@ details p a:hover{color:var(--ink)}
 .art .kbp-help .kh-tel{margin-top:10px;font-size:14.5px;color:var(--muted)}
 .art .kbp-help .kh-tel a{color:var(--ink);font-weight:600;text-decoration:none;white-space:nowrap;transition:color .13s ease}
 .art .kbp-help .kh-tel a:hover{color:var(--amber-dark)}
+.art .letter{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:14px 0 18px;font-size:14.5px;line-height:1.6}
+.art .letter p{margin:0 0 10px}
+.art .letter table{font-size:13.5px;margin:8px 0 12px}
+.art .letter .muted{color:var(--muted)}
+.art a.btn-dl{display:inline-flex;align-items:center;gap:8px;margin:4px 0 18px;padding:10px 18px;border-radius:999px;background:var(--amber);color:var(--ink);font-weight:600;text-decoration:none;transition:background .13s ease}
+.art a.btn-dl:hover{background:#e0a800}
+.art .svc-kp{margin:36px 0 8px;background:var(--card);border:1px solid var(--line);border-top:3px solid var(--amber);border-radius:var(--r);padding:24px 26px;box-shadow:var(--shadow)}
+.art .svc-kp h2{margin:0 0 10px;font-size:22px}
+.art .svc-kp ol{margin:6px 0 12px 20px}
+.art .svc-kp .svc-note{font-size:14.5px;color:var(--muted)}
+.art .svc-kp .svc-price{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:18px;margin:4px 0 14px}
+.art .svc-kp button,.art .svc-kp .svc-form button{font:inherit;font-weight:600;padding:11px 22px;border-radius:999px;border:0;background:var(--amber);color:var(--ink);cursor:pointer;transition:background .13s ease}
+.art .svc-kp button:hover{background:#e0a800}
+.art .svc-kp button:disabled{opacity:.6;cursor:default}
+.art .svc-kp .svc-alt{margin:12px 0 0;font-size:14.5px;color:var(--muted)}
+.art .svc-kp .svc-alt a{color:var(--ink);font-weight:600;white-space:nowrap}
+.art .svc-form{display:grid;gap:12px;margin-top:6px}
+.art .svc-form[hidden],.art .svc-ok[hidden]{display:none}
+.art .svc-form label{display:grid;gap:5px;font-size:14px;font-weight:600}
+.art .svc-form label span{font-weight:400;color:var(--muted)}
+.art .svc-form input,.art .svc-form textarea{font:inherit;font-size:15px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.art .svc-form input:focus,.art .svc-form textarea:focus{outline:none;border-color:var(--amber)}
+.art .svc-form textarea{min-height:90px;resize:vertical}
+.art .svc-form .hp{position:absolute;left:-9999px}
+.art .svc-form .svc-err{color:#9B2C2C;font-size:14px}
+.art .svc-form .svc-legal{font-size:13px;color:var(--muted)}
+.art .svc-ok{background:#EEF6F1;color:#1F5E46;border-radius:10px;padding:12px 16px;font-weight:600}
 .art figure{margin:20px 0;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
 .art figure img{display:block;width:100%;height:auto}
 .art figcaption{font-size:13.5px;color:var(--muted);padding:10px 16px;border-top:1px solid var(--line)}
@@ -366,7 +393,7 @@ gtag('config', 'G-2LT3V3W7FC', {linker: {domains: ['budprocess.com', 'app.budpro
 <div class="crumbs"><a href="/">Головна</a> → Довідник</div>
 <h1>Довідник: аналіз цін для ЄДЕССБ</h1>
 <p class="lead">Аналіз цін — фактично це процес підбору джерел і цінових пропозицій, кодів КБП, формування обмінних файлів і завантаження їх у ЄДЕССБ. У довіднику розібрано кожен із цих кроків: що потрібно, звідки брати дані і де найчастіше помиляються.</p>
-<div class="idx"><a href="/dovidnyk/zvit-z-analizu-tsin"><img src="/img/service-result.webp" alt="" loading="lazy"><div><h3>Звіт з аналізу цін на матеріальні ресурси: що це, коли потрібен і як скласти</h3><p>Що має бути у звіті, звідки брати ціни, скільки джерел потрібно на кожну позицію і які помилки найчастіше повертає перевірка в ЄДЕССБ.</p></div></a><a href="/dovidnyk/ranzhuvannya-60-30-10"><img src="/img/rlmt-avk.webp" alt="" loading="lazy"><div><h3>Ранжування 60/30/10: як поділити матеріальні ресурси і скільки джерел цін потрібно</h3><p>Правило поділу ресурсів на ціноутворюючі й неціноутворюючі, приклад розрахунку на восьми позиціях, межові випадки і що зміниться з серпня 2027 року.</p></div></a><a href="/dovidnyk/kody-kbp"><img src="/img/kbp-portal-search.webp" alt="" loading="lazy"><div><h3>Коди КБП: як підібрати код Кодифікатора будівельної продукції для матеріалу з кошторису</h3><p>Що таке код КБП, як влаштований Кодифікатор, яким позиціям код обов'язковий, як знайти правильну специфікацію і не помилитись з одиницею виміру.</p></div></a><a href="/dovidnyk/obminni-fayly-edessb"><img src="/img/edessb-templates.webp" alt="" loading="lazy"><div><h3>Обмінні файли ЄДЕССБ для звіту з аналізу цін: що в них і як заповнити</h3><p>Три файли xlsx, які імпортуються в кабінет ЄДЕССБ: з чого вони складаються, звідки брати шаблони, як заповнити джерела й постачальників і які перевірки проходить файл при імпорті.</p></div></a><a href="/dovidnyk/prays-lyst-z-bdcb"><img src="/img/bdcb-catalog.webp" alt="" loading="lazy"><div><h3>Прайс-лист з БДЦБ: що це таке і як використати його в аналізі цін для ЄДЕССБ</h3><p>Новий тип джерела ціни в ЄДЕССБ: що це за каталог, як шукати в ньому матеріал з відомості і коли брати ціну у звіт.</p></div></a></div>
+<div class="idx"><a href="/dovidnyk/zvit-z-analizu-tsin"><img src="/img/service-result.webp" alt="" loading="lazy"><div><h3>Звіт з аналізу цін на матеріальні ресурси: що це, коли потрібен і як скласти</h3><p>Що має бути у звіті, звідки брати ціни, скільки джерел потрібно на кожну позицію і які помилки найчастіше повертає перевірка в ЄДЕССБ.</p></div></a><a href="/dovidnyk/ranzhuvannya-60-30-10"><img src="/img/rlmt-avk.webp" alt="" loading="lazy"><div><h3>Ранжування 60/30/10: як поділити матеріальні ресурси і скільки джерел цін потрібно</h3><p>Правило поділу ресурсів на ціноутворюючі й неціноутворюючі, приклад розрахунку на восьми позиціях, межові випадки і що зміниться з серпня 2027 року.</p></div></a><a href="/dovidnyk/kody-kbp"><img src="/img/kbp-portal-search.webp" alt="" loading="lazy"><div><h3>Коди КБП: як підібрати код Кодифікатора будівельної продукції для матеріалу з кошторису</h3><p>Що таке код КБП, як влаштований Кодифікатор, яким позиціям код обов'язковий, як знайти правильну специфікацію і не помилитись з одиницею виміру.</p></div></a><a href="/dovidnyk/obminni-fayly-edessb"><img src="/img/edessb-templates.webp" alt="" loading="lazy"><div><h3>Обмінні файли ЄДЕССБ для звіту з аналізу цін: що в них і як заповнити</h3><p>Три файли xlsx, які імпортуються в кабінет ЄДЕССБ: з чого вони складаються, звідки брати шаблони, як заповнити джерела й постачальників і які перевірки проходить файл при імпорті.</p></div></a><a href="/dovidnyk/prays-lyst-z-bdcb"><img src="/img/bdcb-catalog.webp" alt="" loading="lazy"><div><h3>Прайс-лист з БДЦБ: що це таке і як використати його в аналізі цін для ЄДЕССБ</h3><p>Новий тип джерела ціни в ЄДЕССБ: що це за каталог, як шукати в ньому матеріал з відомості і коли брати ціну у звіт.</p></div></a><a href="/dovidnyk/tsinoutvoriuiuchi-materialni-resursy"><img src="/img/instr/10-kp-done.webp" alt="" loading="lazy"><div><h3>Ціноутворюючі матеріальні ресурси і комерційні пропозиції (КП): що це, як визначити, зразок</h3><p>Як визначити ціноутворюючі ресурси в кошторисі, скільки комерційних пропозицій потрібно, як запросити їх у постачальників і що робити, якщо відповіді немає.</p></div></a></div>
 </article>
 </div>
 </main>
