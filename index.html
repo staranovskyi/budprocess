@@ -391,6 +391,7 @@ e.preventDefault();
 target.scrollIntoView({behavior:'smooth', block:'start'});
 });
 });
+(function(){ var hd = document.querySelector('header'); if(!hd) return; function pad(){ document.documentElement.style.scrollPaddingTop = (hd.offsetHeight + 12) + 'px'; } pad(); addEventListener('resize', pad); })();
 if(location.hash){ var hashT = document.getElementById(decodeURIComponent(location.hash.slice(1))); history.replaceState(null, '', location.pathname + location.search); if(hashT){ addEventListener('load', function(){ setTimeout(function(){ hashT.scrollIntoView({block:'start', behavior:'instant'}); }, 60); }); } }
 (function(){
 var st = document.getElementById('sticky'), hero = document.querySelector('.hero'), contact = document.getElementById('contact');
