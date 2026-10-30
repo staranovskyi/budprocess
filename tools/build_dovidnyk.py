@@ -155,7 +155,8 @@ def base_css():
 
 
 def header(active):
-    h = section(BASE, "header").replace(' aria-current="page"', "")
+    # «Контакти» в шапці «Аналізу цін» — якір на тій самій сторінці; тут такого розділу немає, тож ведемо туди (2026-10-30)
+    h = section(BASE, "header").replace(' aria-current="page"', "").replace('href="#contact"', 'href="/analiz-tsin#contact"')
     cur = ' aria-current="page"' if active == "dovidnyk" else ""
     if '<a href="/dovidnyk/">Довідник</a>' in h:
         return h.replace('<a href="/dovidnyk/">Довідник</a>', f'<a href="/dovidnyk/"{cur}>Довідник</a>')

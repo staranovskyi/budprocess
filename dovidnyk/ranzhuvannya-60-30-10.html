@@ -439,7 +439,7 @@ gtag('config', 'G-2LT3V3W7FC', {linker: {domains: ['budprocess.com', 'app.budpro
 <a href="/analiz-tsin">Аналіз цін</a>
 <a href="/koshtorysy">Кошториси</a>
 <a href="/dovidnyk/" aria-current="page">Довідник</a>
-<a href="#contact" class="nav-hide">Контакти</a>
+<a href="/analiz-tsin#contact" class="nav-hide">Контакти</a>
 <a class="nav-app" href="https://app.budprocess.com/">Онлайн-сервіс</a>
 </nav>
 <div class="head-phone">
@@ -532,7 +532,7 @@ e.preventDefault();
 target.scrollIntoView({behavior:'smooth', block:'start'});
 });
 });
-if(location.hash){ history.replaceState(null, '', location.pathname + location.search); }
+if(location.hash){ var hashT = document.getElementById(decodeURIComponent(location.hash.slice(1))); history.replaceState(null, '', location.pathname + location.search); if(hashT){ addEventListener('load', function(){ setTimeout(function(){ hashT.scrollIntoView({block:'start', behavior:'instant'}); }, 60); }); } }
 (function(){
 var st = document.getElementById('sticky'), hero = document.querySelector('.hero'), contact = document.getElementById('contact');
 if(!st || !hero) return;
