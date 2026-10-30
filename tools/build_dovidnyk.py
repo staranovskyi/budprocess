@@ -127,6 +127,7 @@ AUTHOR_CARD = """<div class="author">
 <div><b>Станіслав</b>, засновник BudProcess<br>Створює сервіс аналізу цін і керує всіма процесами: від розробки до підготовки звітів. Матеріали довідника перевіряє сертифікований інженер-кошторисник команди з досвідом роботи головним інженером будівельної компанії. <a href="/analiz-tsin#contact">Поставити питання</a></div>
 </div>"""
 
+# Чорний рекламний блок під статтею: з 2026-10-30 вимкнено в усіх статтях (рішення власника), вмикається лише «cta: yes»
 CTA = """<div class="cta-box">
 <h2>Зробіть аналіз цін онлайн за кілька годин</h2>
 <p>Завантажте відомість ресурсів (ПВР або РЛМТ). Сервіс підбере коди КБП, знайде джерела цін і збере три обмінні файли для ЄДЕССБ.</p>
@@ -258,7 +259,7 @@ def page(meta, body, others):
 <p class="lead">{meta["lead"]}</p>
 <div class="meta"><img class="ava" src="/img/author.webp" width="28" height="28" alt="">{AUTHOR["name"]}, {AUTHOR["role"]} · Оновлено {human(meta.get("updated", meta.get("date", "2026-10-15")))} · {meta.get("read", "7")} хв читання</div>
 {body.strip()}
-{'' if standalone or meta.get("cta") == "no" else CTA}
+{CTA if meta.get("cta") == "yes" and not standalone else ''}
 {more_block}
 </article>
 </div>
