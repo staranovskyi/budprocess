@@ -425,7 +425,7 @@ details p a:hover{color:var(--ink)}
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-2LT3V3W7FC', {linker: {domains: ['budprocess.com', 'app.budprocess.com']}});
+gtag('config', 'G-2LT3V3W7FC');
 </script>
 </head>
 <body>
@@ -551,11 +551,16 @@ function bpWhere(a){
     if(x.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_FOLLOWING) h = x; });
   return h ? 'text#' + h.id : 'text';
 }
-document.querySelectorAll('a[href^="https://app.budprocess.com"]').forEach(function(a){ try {
-  var u = new URL(a.href); if(u.searchParams.has('bp_land')) return;
-  u.searchParams.set('bp_land', f.p); u.searchParams.set('bp_ref', f.r); u.searchParams.set('bp_from', location.pathname);
-  u.searchParams.set('bp_link', bpWhere(a));
-  a.href = u.toString(); } catch(_){} });
+/* cookie на весь budprocess.com: сервіс (app.budprocess.com) читає її при першому заході; в адресі нічого не видно */
+function bpSave(link){ try { var v = 'bp_land=' + encodeURIComponent(f.p) + '&bp_ref=' + encodeURIComponent(f.r)
+  + '&bp_from=' + encodeURIComponent(location.pathname) + (link ? '&bp_link=' + encodeURIComponent(link) : '');
+  var d = /(^|\.)budprocess\.com$/.test(location.hostname) ? '; domain=.budprocess.com; secure' : '';
+  document.cookie = 'bp_src=' + encodeURIComponent(v) + '; path=/; max-age=2592000; samesite=lax' + d; } catch(_){} }
+bpSave('');
+document.addEventListener('pointerdown', function(e){ var a = e.target.closest && e.target.closest('a[href^="https://app.budprocess.com"]');
+  if(a) bpSave(bpWhere(a)); }, true);
+document.addEventListener('keydown', function(e){ var a = e.key === 'Enter' && e.target.closest && e.target.closest('a[href^="https://app.budprocess.com"]');
+  if(a) bpSave(bpWhere(a)); }, true);
 } catch(_){} })();
 (function(){ var hd = document.querySelector('header'); if(!hd) return; function pad(){ document.documentElement.style.scrollPaddingTop = (hd.offsetHeight + 12) + 'px'; } pad(); addEventListener('resize', pad); })();
 if(location.hash){ var hashT = document.getElementById(decodeURIComponent(location.hash.slice(1))); history.replaceState(null, '', location.pathname + location.search); if(hashT){ addEventListener('load', function(){ setTimeout(function(){ hashT.scrollIntoView({block:'start', behavior:'instant'}); }, 60); }); } }
