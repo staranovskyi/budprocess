@@ -542,9 +542,19 @@ target.scrollIntoView({behavior:'smooth', block:'start'});
 var f = null; try { f = JSON.parse(localStorage.getItem('bp_first') || 'null'); } catch(_){}
 if(!f || !f.p){ var r = 'direct'; try { var u = new URL(document.referrer); if(!/(^|\.)budprocess\.com$/.test(u.hostname)) r = u.hostname.replace(/^www\./, ''); } catch(_){}
   f = {p: location.pathname, r: r}; try { localStorage.setItem('bp_first', JSON.stringify(f)); } catch(_){} }
+function bpWhere(a){
+  if(a.closest('header')) return 'header'; if(a.closest('footer')) return 'footer';
+  if(a.closest('.kbp-help')) return 'plaque'; if(a.closest('.svc-kp')) return 'service';
+  if(a.closest('#sticky')) return 'sticky'; if(a.closest('.hero')) return 'hero';
+  var s = a.closest('section[id]'); if(s) return 'sec#' + s.id;
+  var h = null; document.querySelectorAll('h2[id]').forEach(function(x){
+    if(x.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_FOLLOWING) h = x; });
+  return h ? 'text#' + h.id : 'text';
+}
 document.querySelectorAll('a[href^="https://app.budprocess.com"]').forEach(function(a){ try {
   var u = new URL(a.href); if(u.searchParams.has('bp_land')) return;
   u.searchParams.set('bp_land', f.p); u.searchParams.set('bp_ref', f.r); u.searchParams.set('bp_from', location.pathname);
+  u.searchParams.set('bp_link', bpWhere(a));
   a.href = u.toString(); } catch(_){} });
 } catch(_){} })();
 (function(){ var hd = document.querySelector('header'); if(!hd) return; function pad(){ document.documentElement.style.scrollPaddingTop = (hd.offsetHeight + 12) + 'px'; } pad(); addEventListener('resize', pad); })();
