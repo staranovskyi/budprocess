@@ -46,6 +46,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.92);backdro
 .nav .nav-svc-b{display:inline-flex;align-items:center;justify-content:center;width:26px;height:30px;margin-left:-6px;border:0;background:transparent;color:#8a6400;cursor:pointer;border-radius:999px;padding:0}
 .nav .nav-svc-b:hover,.nav .nav-svc-b[aria-expanded="true"]{color:var(--ink)}
 .nav .nav-svc-m{display:none;position:absolute;top:calc(100% + 8px);right:0;min-width:270px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 34px rgba(22,35,46,.12);padding:6px;z-index:40}
+.nav .nav-svc-m::before{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}   /* місток: курсор переходить з кнопки на список, не втрачаючи наведення */
 .nav .nav-svc.open .nav-svc-m{display:block}
 @media(hover:hover){.nav .nav-svc:hover .nav-svc-m{display:block}}
 .nav .nav-svc-m a{display:block;padding:9px 12px;border-radius:9px;border:0;color:var(--ink);white-space:normal}
