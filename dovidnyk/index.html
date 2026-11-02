@@ -42,6 +42,17 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.92);backdro
 .nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--amber)}
 .nav a.nav-app{background:var(--amber-soft);color:#8a6400;padding:7px 13px;border-radius:999px;border-bottom:0;font-weight:600;transition:background .13s ease,color .13s ease}
 .nav a.nav-app:hover{background:var(--amber);color:var(--ink)}
+.nav .nav-svc{position:relative;display:inline-flex;align-items:center}
+.nav .nav-svc-b{display:inline-flex;align-items:center;justify-content:center;width:26px;height:30px;margin-left:-6px;border:0;background:transparent;color:#8a6400;cursor:pointer;border-radius:999px;padding:0}
+.nav .nav-svc-b:hover,.nav .nav-svc-b[aria-expanded="true"]{color:var(--ink)}
+.nav .nav-svc-m{display:none;position:absolute;top:calc(100% + 8px);right:0;min-width:270px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 34px rgba(22,35,46,.12);padding:6px;z-index:40}
+.nav .nav-svc.open .nav-svc-m{display:block}
+@media(hover:hover){.nav .nav-svc:hover .nav-svc-m{display:block}}
+.nav .nav-svc-m a{display:block;padding:9px 12px;border-radius:9px;border:0;color:var(--ink);white-space:normal}
+.nav .nav-svc-m a:hover{background:#F6F7F5}
+.nav .nav-svc-m a b{display:block;font-size:14.5px;font-weight:600}
+.nav .nav-svc-m a small{display:block;font-size:12.5px;color:var(--muted);margin-top:1px}
+@media(max-width:900px){.nav .nav-svc-m{right:auto;left:0}}
 .head-phone{text-align:right;line-height:1.2}
 .hp-num{text-decoration:none;display:inline-block}
 .hp-num b{font-size:16px;white-space:nowrap}
@@ -376,7 +387,7 @@ gtag('config', 'G-2LT3V3W7FC');
 <a href="/koshtorysy">Кошториси</a>
 <a href="/dovidnyk/" aria-current="page">Довідник</a>
 <a href="/kontakty" class="nav-hide">Контакти</a>
-<a class="nav-app" href="https://app.budprocess.com/">Онлайн-сервіс</a>
+<span class="nav-svc"><a class="nav-app" href="https://app.budprocess.com/">Онлайн-сервіс</a><button class="nav-svc-b" type="button" aria-label="Послуги онлайн-сервісу" aria-expanded="false" aria-haspopup="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="nav-svc-m" role="menu"><a role="menuitem" href="https://app.budprocess.com/"><b>Аналіз цін для ЄДЕССБ</b><small>коди КБП, джерела цін, три обмінні файли</small></a><a role="menuitem" href="https://app.budprocess.com/kody-kbp"><b>Коди КБП</b><small>лише коди, один обмінний файл</small></a></div></span>
 </nav>
 <div class="head-phone">
 <a class="hp-num" href="tel:+380663914479"><b>+380 66 391 44 79</b></a>
@@ -483,5 +494,10 @@ var io = new IntersectionObserver(function(es){ es.forEach(function(e){
 els.forEach(function(el){ io.observe(el); });
 })();
 </script>
+<script>/* «Онлайн-сервіс»: на комп'ютері список відкривається наведенням, на дотику — стрілкою; клік поза списком закриває */
+(function(){var w=document.querySelector('.nav-svc');if(!w)return;var b=w.querySelector('.nav-svc-b');
+b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var o=!w.classList.contains('open');w.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))});
+document.addEventListener('click',function(e){if(!w.contains(e.target)){w.classList.remove('open');b.setAttribute('aria-expanded','false')}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){w.classList.remove('open');b.setAttribute('aria-expanded','false')}});})();</script>
 </body>
 </html>
