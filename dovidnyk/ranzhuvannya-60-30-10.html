@@ -474,7 +474,7 @@ gtag('config', 'G-2LT3V3W7FC');
 <h2 id="pravylo">Правило в одному абзаці</h2>
 <p>Усі матеріальні ресурси розділу III підсумкової відомості ресурсів шикуються за <b>загальною вартістю</b> (ціна × кількість) від більшої до меншої. Далі рахується накопичена частка у загальній вартості матеріалів:</p>
 <ul>
-<li><b>Розділ 1, ціноутворюючі.</b> Позиції зверху списку, які разом дають 60&nbsp;% вартості. Для кожної потрібно не менше трьох цінових пропозицій від виробників, імпортерів або дистриб'юторів.</li>
+<li><b>Розділ 1, ціноутворюючі.</b> Позиції зверху списку, які разом дають 60&nbsp;% вартості. Для кожної потрібно не менше трьох цінових пропозицій від виробників, імпортерів або дистриб'юторів. <a href="/dovidnyk/tsinoutvoriuiuchi-materialni-resursy#posluga">Запити постачальникам можемо надіслати за вас</a>.</li>
 <li><b>Розділ 2.1, неціноутворюючі (30&nbsp;%).</b> Наступні позиції, які дають ще 30&nbsp;%. Не менше однієї пропозиції з будь-якого джерела.</li>
 <li><b>Розділ 2.2, неціноутворюючі (10&nbsp;%).</b> Решта, найдешевші. Джерела не обов'язкові, у звіт може йти кошторисна ціна.</li>
 </ul>
@@ -590,6 +590,7 @@ if(!a || typeof gtag !== 'function') return;
 var kh = a.closest('.kbp-help');
 if(kh){ gtag('event','kbp_help_click',{place: kh.getAttribute('data-place') || '', channel: a.getAttribute('data-ch') || '', page: location.pathname}); return; }
 var h = a.getAttribute('href') || '';
+if(h.indexOf('#posluga') > -1){ gtag('event','kp_service_link',{place:'dovidnyk', page: location.pathname}); return; }
 if(h.indexOf('app.budprocess.com') > -1){
 var place = a.closest('header') ? 'nav' : a.closest('.sticky-cta') ? 'sticky' : a.closest('.hero') ? 'hero'
   : a.closest('.way-main') ? 'card' : a.closest('.cmp') ? 'compare' : a.closest('.price-online') ? 'price'

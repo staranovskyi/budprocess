@@ -599,6 +599,7 @@ if(!a || typeof gtag !== 'function') return;
 var kh = a.closest('.kbp-help');
 if(kh){ gtag('event','kbp_help_click',{place: kh.getAttribute('data-place') || '', channel: a.getAttribute('data-ch') || '', page: location.pathname}); return; }
 var h = a.getAttribute('href') || '';
+if(h.indexOf('#posluga') > -1){ gtag('event','kp_service_link',{place:'dovidnyk', page: location.pathname}); return; }
 if(h.indexOf('app.budprocess.com') > -1){
 var place = a.closest('header') ? 'nav' : a.closest('.sticky-cta') ? 'sticky' : a.closest('.hero') ? 'hero'
   : a.closest('.way-main') ? 'card' : a.closest('.cmp') ? 'compare' : a.closest('.price-online') ? 'price'
