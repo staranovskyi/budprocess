@@ -357,6 +357,7 @@ details p a:hover{color:var(--ink)}
 .idx h3{font-size:17px;font-weight:600;margin:0 0 6px;color:var(--ink)}
 .idx p{font-size:14.5px;color:var(--muted);margin:0}
 .idx .new{display:inline-block;vertical-align:2px;margin-right:8px;padding:2px 8px;border-radius:999px;background:#E6F2EC;color:#1F5E46;font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;letter-spacing:.02em}
+.vid{position:relative;display:block;width:100%;aspect-ratio:16/9;padding:0;border:0;background:#16232E;cursor:pointer;overflow:hidden}.vid img{width:100%;height:100%;object-fit:cover;display:block;opacity:.92;transition:opacity .15s}.vid:hover img{opacity:1}.vid .play{position:absolute;left:50%;top:50%;width:76px;height:54px;margin:-27px 0 0 -38px;border-radius:14px;background:#F2B705;box-shadow:0 6px 20px rgba(0,0,0,.35)}.vid .play:after{content:'';position:absolute;left:31px;top:16px;border-style:solid;border-width:11px 0 11px 18px;border-color:transparent transparent transparent #16232E}.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 </style>
 <link rel="canonical" href="https://budprocess.com/instrukciya">
 <meta name="robots" content="index, follow">
@@ -465,6 +466,7 @@ gtag('config', 'G-2LT3V3W7FC');
 <h1>Як зробити аналіз цін для ЄДЕССБ в онлайн-сервісі: покрокова інструкція</h1>
 <p class="lead">Від відомості ресурсів до трьох обмінних файлів і їх імпорту в ЄДЕССБ. Кожен крок з екраном сервісу: що натиснути і що ви побачите.</p>
 <div class="meta"><img class="ava" src="/img/author.webp" width="28" height="28" alt="">Станіслав, засновник BudProcess · Оновлено 30 жовтня 2026 · 9 хв читання</div>
+<figure class="shot" id="video" style="scroll-margin-top:90px"><button class="vid" type="button" data-yt="OZOpCPBHwRs" aria-label="Дивитися відеоінструкцію"><img src="https://i.ytimg.com/vi/OZOpCPBHwRs/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/OZOpCPBHwRs/hqdefault.jpg'" width="1280" height="720" loading="lazy" alt="Відеоінструкція: аналіз цін для ЄДЕССБ в онлайн-сервісі BudProcess"><span class="play"></span></button><figcaption>Як зробити аналіз цін у сервісі: завантажуємо тестову відомість і отримуємо три обмінні файли для ЄДЕССБ. <a href="https://youtu.be/OZOpCPBHwRs" target="_blank" rel="noopener">Відкрити на YouTube</a></figcaption></figure>
 <div class="toc">
 <b>Що знадобиться:</b> підсумкова відомість ресурсів (ПВР) або файл «Відомість матеріальних ресурсів із зазначенням відсоткової частки» (РЛМТ) з кошторисної програми у форматі xls, xlsx або rtf і ваша електронна пошта. Перші 300&nbsp;грн на балансі після підтвердження пошти.
 <ol>
@@ -635,5 +637,6 @@ els.forEach(function(el){ io.observe(el); });
 b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var o=!w.classList.contains('open');w.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))});
 document.addEventListener('click',function(e){if(!w.contains(e.target)){w.classList.remove('open');b.setAttribute('aria-expanded','false')}});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){w.classList.remove('open');b.setAttribute('aria-expanded','false')}});})();</script>
+<script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.vid');if(!b||b.querySelector('iframe'))return;var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+b.getAttribute('data-yt')+'?autoplay=1&rel=0';f.title='Відеоінструкція BudProcess';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;b.appendChild(f);try{gtag('event','video_play',{page:location.pathname})}catch(x){}});</script>
 </body>
 </html>
