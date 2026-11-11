@@ -173,7 +173,9 @@ def footer():
 _ga0 = BASE.find("<!-- Google Analytics 4 -->")
 _ga1 = BASE.find("</script>", BASE.find("</script>", _ga0) + 1) + len("</script>")
 GA = BASE[_ga0:_ga1]  # блок GA4: підключення + gtag('config')
-SCRIPTS = BASE[BASE.rfind("<script>"):BASE.rfind("</script>") + 9]  # останній <script> — плавний скрол, липка панель, події кліків
+# усі скрипти після футера базової сторінки: плавний скрол і події кліків, випадний список «Онлайн-сервіс», відео за кліком
+# (до 2026-11-10 брався лише останній <script>: після додавання списку й відео перезбирання лишало б сторінки без основного)
+SCRIPTS = BASE[BASE.find("<script>", BASE.find("</footer>")):BASE.rfind("</script>") + 9]
 
 
 def parse(path):
@@ -217,7 +219,7 @@ def page(meta, body, others):
         ld["@graph"].append({"@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": unescape(q), "acceptedAnswer": {"@type": "Answer", "text": unescape(a)}} for q, a in meta["faq"]]})
     more = "".join(f'<li><a href="/dovidnyk/{o["slug"]}">{o["h1"]}</a></li>' for o in others)
-    byline = "" if meta.get("byline") == "no" else f'''<div class="meta"><img class="ava" src="/img/author.webp" width="28" height="28" alt="">{AUTHOR["name"]}, {AUTHOR["role"]} · Оновлено {human(meta.get("updated", meta.get("date", "2026-10-15")))} · {meta.get("read", "7")} хв читання</div>'''
+    byline = "" if meta.get("byline") == "no" else f'''<div class="meta"><img class="ava" src="/img/author.webp" width="28" height="28" alt="">{AUTHOR["name"]} · Оновлено {human(meta.get("updated", meta.get("date", "2026-10-15")))} · {meta.get("read", "7")} хв читання</div>'''
     more_block = "" if standalone else f'<div class="more"><h2>Ще в довіднику</h2><ul>{more}</ul></div>'
     crumbs = (f'<a href="/">Головна</a> → {meta.get("short", meta["h1"])}' if standalone
               else f'<a href="/">Головна</a> → <a href="/dovidnyk/">Довідник</a> → {meta.get("short", meta["h1"])}')
