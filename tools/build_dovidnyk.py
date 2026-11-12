@@ -205,7 +205,7 @@ def page(meta, body, others):
              "datePublished": meta.get("date", "2026-10-15"), "dateModified": meta.get("updated", meta.get("date", "2026-10-15")),
              "inLanguage": "uk", "author": {"@type": "Person", "name": AUTHOR["name"], "jobTitle": AUTHOR["role"], "image": SITE + "/img/author.webp", "worksFor": {"@type": "Organization", "name": "BudProcess", "url": SITE + "/"}},
              "publisher": {"@type": "Organization", "name": "BudProcess", "url": SITE + "/", "logo": {"@type": "ImageObject", "url": SITE + "/icon-192.png"}},
-             "image": SITE + meta.get("image", "/og-image.jpg")},
+             "image": SITE + meta.get("image", "/og-image-2.jpg")},
             {"@type": "BreadcrumbList", "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Головна", "item": SITE + "/"},
                 *([] if standalone else [{"@type": "ListItem", "position": 2, "name": "Довідник", "item": SITE + "/dovidnyk/"}]),
@@ -247,11 +247,11 @@ def page(meta, body, others):
 <meta property="og:locale" content="uk_UA">
 <meta property="og:title" content="{meta["title"]}">
 <meta property="og:description" content="{meta["description"]}">
-<meta property="og:image" content="{SITE}{meta.get("image", "/og-image.jpg")}">
+<meta property="og:image" content="{SITE}{meta.get("image", "/og-image-2.jpg")}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{meta["title"]}">
 <meta name="twitter:description" content="{meta["description"]}">
-<meta name="twitter:image" content="{SITE}{meta.get("image", "/og-image.jpg")}">
+<meta name="twitter:image" content="{SITE}{meta.get("image", "/og-image-2.jpg")}">
 <script type="application/ld+json">
 {json.dumps(ld, ensure_ascii=False, indent=1)}
 </script>
@@ -321,7 +321,7 @@ def index(pages):
 <meta property="og:locale" content="uk_UA">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="{SITE}/og-image.jpg">
+<meta property="og:image" content="{SITE}/og-image-2.jpg">
 {GA}
 </head>
 <body>
