@@ -189,7 +189,7 @@ main = f'''<main>
 <div class="obj-next">
 <h2>Потрібен аналіз цін для вашого кошторису?</h2>
 <div class="cta-row obj-cta">
-<a class="btn btn-amber" href="https://app.budprocess.com/">Зробити онлайн</a>
+<a class="btn btn-amber" href="https://app.budprocess.com/analiz-tsin">Зробити онлайн</a>
 <a class="btn btn-line" href="/analiz-tsin#contact">Замовити під ключ</a>
 </div>
 </div>
